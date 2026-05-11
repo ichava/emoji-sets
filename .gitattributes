@@ -1,0 +1,10 @@
+# Composer dist tarballs exclude these (matches the rest of the Ichava
+# ecosystem). Keeps wheel size down for consumers who only need the
+# package code + assets.
+/.github          export-ignore
+/tests            export-ignore
+/scripts          export-ignore
+/phpunit.xml.dist export-ignore
+/CHANGELOG.md     export-ignore
+/.gitattributes   export-ignore
+/.gitignore       export-ignore

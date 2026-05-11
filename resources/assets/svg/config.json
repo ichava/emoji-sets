@@ -1,0 +1,63 @@
+{
+    "schema_version": "1.0",
+    "package": {
+        "name": "ichava/emoji-sets",
+        "title": "Emoji Sets",
+        "description": "Multi-source emoji bundle (Twemoji, OpenMoji color, OpenMoji black). Unicode 17 / Emoji 17 spec. Categorised by Unicode CLDR groups.",
+        "keywords": ["emoji", "twemoji", "openmoji", "svg", "unicode", "bundle"],
+        "version": "0.1.0",
+        "upstream_version": "twemoji@17.0.0 + openmoji@latest",
+        "type": "bulk",
+        "license": "MIT (code) / CC-BY 4.0 (Twemoji assets) / CC-BY-SA 4.0 (OpenMoji assets)"
+    },
+    "metadata": {
+        "authors": [
+            {
+                "name": "Twitter, Inc. and other contributors (Twemoji)",
+                "role": "Creator -- Twemoji",
+                "url": "https://github.com/jdecked/twemoji"
+            },
+            {
+                "name": "HfG Schwäbisch Gmünd + community (OpenMoji)",
+                "role": "Creator -- OpenMoji",
+                "url": "https://openmoji.org/"
+            }
+        ],
+        "homepage": "https://github.com/ichava/emoji-sets",
+        "repository": "https://github.com/ichava/emoji-sets",
+        "data": {
+            "variants": {
+                "default": {
+                    "name": "Default",
+                    "slug": "default",
+                    "description": "Standard emoji style from each source set",
+                    "default": true,
+                    "icon_suffix": "",
+                    "display_order": 1,
+                    "attributes": {},
+                    "color_scheme": "adaptive"
+                }
+            },
+            "categories": {
+                "twemoji": {
+                    "name": "Twemoji",
+                    "description": "Twitter/X's open-source emoji set (CC-BY 4.0). Recognisable rounded colourful style. Default set.",
+                    "sets": ["twemoji"]
+                },
+                "openmoji-color": {
+                    "name": "OpenMoji Color",
+                    "description": "Community-driven flat colourful emojis from HfG Schwäbisch Gmünd (CC-BY-SA 4.0).",
+                    "sets": ["openmoji-color"]
+                },
+                "openmoji-black": {
+                    "name": "OpenMoji Black",
+                    "description": "Monochrome outline variant of OpenMoji (CC-BY-SA 4.0). Ideal for single-colour designs.",
+                    "sets": ["openmoji-black"]
+                }
+            }
+        }
+    },
+    "config": {
+        "icon_prefix": "emoji"
+    }
+}
