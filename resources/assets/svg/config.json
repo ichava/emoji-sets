@@ -59,5 +59,38 @@
     },
     "config": {
         "icon_prefix": "emoji"
+    },
+    "upstream": {
+        "_comment": "Multi-source pack: each emoji set has its own upstream. The checker treats `source` as the primary tracker; supplementary sources live under `additional_sources` for documentation + future per-set checking.",
+        "source": {
+            "type": "npm",
+            "package": "@twemoji/svg",
+            "_why_npm": "NPM publishes new Twemoji releases the same day as GitHub but with no rate-limit ceiling and a simpler API contract."
+        },
+        "current_version": "17.0.0",
+        "version_check_url": "https://registry.npmjs.org/@twemoji/svg/latest",
+        "license": "CC-BY 4.0 (Twemoji assets) + CC-BY-SA 4.0 (OpenMoji assets)",
+        "cdn": {
+            "twemoji_jsdelivr": "https://cdn.jsdelivr.net/npm/@twemoji/svg@{version}/{codepoint}.svg",
+            "twemoji_unpkg": "https://unpkg.com/@twemoji/svg@{version}/{codepoint}.svg",
+            "twemoji_github_raw": "https://raw.githubusercontent.com/jdecked/twemoji/v{version}/assets/svg/{codepoint}.svg",
+            "openmoji_color_jsdelivr": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji@latest/color/svg/{codepoint}.svg",
+            "openmoji_black_jsdelivr": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji@latest/black/svg/{codepoint}.svg"
+        },
+        "additional_sources": [
+            {
+                "name": "openmoji",
+                "type": "github",
+                "owner": "hfg-gmuend",
+                "repo": "openmoji",
+                "version_check_url": "https://api.github.com/repos/hfg-gmuend/openmoji/releases/latest",
+                "license": "CC-BY-SA 4.0"
+            }
+        ],
+        "update_command": {
+            "type": "script",
+            "path": "scripts/build_emoji_assets.py",
+            "args": ["--twemoji-version={version}"]
+        }
     }
 }
