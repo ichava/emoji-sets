@@ -27,6 +27,11 @@ enum Set: string implements IconSetVariantInterface
     case OPENMOJI_COLOR = 'openmoji-color';
     case OPENMOJI_BLACK = 'openmoji-black';
 
+    public function getPath(): string
+    {
+        return IconsConstants::getSvgPath($this->value);
+    }
+
     protected static function getDefaultValue(): string
     {
         return IconsConstants::getDefaultCategory() ?? self::TWEMOJI->value;

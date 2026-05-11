@@ -10,7 +10,7 @@ use Simtabi\Laranail\Ichava\Support\PathResolver;
 /**
  * Resolves emoji-sets metadata from its `resources/assets/svg/config.json`.
  *
- * @see \Simtabi\Laranail\Ichava\Constants\JsonConfigConstants
+ * @see JsonConfigConstants
  */
 final class IconsConstants extends JsonConfigConstants
 {

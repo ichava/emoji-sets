@@ -7,6 +7,7 @@ namespace Simtabi\Laranail\Ichava\EmojiSets\Tests\Feature;
 use Simtabi\Laranail\Ichava\EmojiSets\Constants\IconsConstants;
 use Simtabi\Laranail\Ichava\EmojiSets\Enums\Category;
 use Simtabi\Laranail\Ichava\EmojiSets\Enums\Set;
+use Simtabi\Laranail\Ichava\EmojiSets\Providers\IconsServiceProvider;
 use Simtabi\Laranail\Ichava\EmojiSets\Tests\TestCase;
 use Simtabi\Laranail\Ichava\Services\IconRegistry;
 
@@ -17,7 +18,7 @@ class IconsTest extends TestCase
         $providers = array_keys($this->app->getLoadedProviders());
 
         $this->assertContains(
-            \Simtabi\Laranail\Ichava\EmojiSets\Providers\IconsServiceProvider::class,
+            IconsServiceProvider::class,
             $providers
         );
     }

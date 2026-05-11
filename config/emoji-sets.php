@@ -13,7 +13,7 @@ use Simtabi\Laranail\Ichava\EmojiSets\Constants\IconsConstants;
  */
 return [
     'set' => [
-        'name'   => IconsConstants::getPackageName(),
+        'name' => IconsConstants::getPackageName(),
         'prefix' => IconsConstants::getPrefix(),
     ],
 
