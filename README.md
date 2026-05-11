@@ -95,6 +95,60 @@ Assets are committed to the repo, so a `composer require` install is
 all-you-need. To rebuild from upstream sources (Twemoji + OpenMoji
 releases + Unicode CLDR), see [`scripts/README.md`](scripts/README.md).
 
+## CDN endpoints (skip vendoring entirely)
+
+If you'd rather not ship 22MB of SVGs inside your composer install,
+serve them from a CDN. The pack registers its CDN URL templates in
+`config.json` so other tooling can read them too; the canonical
+templates are:
+
+### Twemoji (recommended; CC-BY 4.0)
+
+```
+https://cdn.jsdelivr.net/npm/@twemoji/svg@17.0.0/{codepoint}.svg
+https://unpkg.com/@twemoji/svg@17.0.0/{codepoint}.svg
+https://raw.githubusercontent.com/jdecked/twemoji/v17.0.0/assets/svg/{codepoint}.svg
+```
+
+`{codepoint}` is the dash-joined hex codepoint (e.g. `1f600` for 😀,
+`1f1fa-1f1f8` for 🇺🇸).
+
+### OpenMoji color (CC-BY-SA 4.0)
+
+```
+https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji@latest/color/svg/{codepoint}.svg
+```
+
+### OpenMoji black (CC-BY-SA 4.0)
+
+```
+https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji@latest/black/svg/{codepoint}.svg
+```
+
+### Codepoint lookup
+
+The pack ships `resources/assets/svg/codepoints.json` mapping every
+canonical slug to its codepoint, so you can resolve
+`smileys-emotion/grinning-face` -> `1f600` at runtime and build a CDN
+URL on the fly.
+
+## Upstream tracking
+
+This pack participates in Ichava's upstream-tracking system. Run
+
+```bash
+php artisan ichava:icons:check-updates --package=ichava/emoji-sets
+```
+
+to see whether a newer Twemoji or OpenMoji release exists. The check
+hits `registry.npmjs.org` (and supplementary GitHub releases for
+OpenMoji), caches results for 12 hours, and dispatches
+`IconPackUpdateAvailable` events the host app can route to Slack /
+email / dashboards.
+
+See [`ichava/documentation/icon-pack-upstream-tracking.md`](https://github.com/ichava/documentation/blob/main/icon-pack-upstream-tracking.md)
+for the full schema + how to subscribe to update events.
+
 ## Status
 
 **Alpha (v0.1.0).** Phase A0 skeleton committed. Phase A1 (full asset
