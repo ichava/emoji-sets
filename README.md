@@ -6,6 +6,16 @@ Unicode CLDR groups, served through the Ichava icon engine.
 
 [![Tests](https://github.com/ichava/emoji-sets/actions/workflows/tests.yml/badge.svg)](https://github.com/ichava/emoji-sets/actions/workflows/tests.yml)
 
+> **Status: Phase A0 alpha (v0.1.0).** The Composer package, service
+> provider, enums, indexes, and CDN configuration are wired and tested.
+> **The bundled SVG assets are not yet committed.** The maintainer
+> toolkit ([`ichava/maintainer-toolkit`](https://github.com/ichava/maintainer-toolkit))
+> runs the Twemoji + OpenMoji + CLDR ETL in CI -- the assets land
+> through an automated PR. Until Phase A1 (the first asset drop) ships
+> v1.0, `composer require ichava/emoji-sets` gives you the engine
+> wiring and the CDN config, **not the vendored SVGs**. Use the CDN
+> URLs (below) in the meantime.
+
 ## Why
 
 The Ichava ecosystem ships per-vendor icon packs (`tabler-icons`,
@@ -92,8 +102,11 @@ are CLDR canonical short-name slugs (e.g. `grinning-face.svg`,
 ## Building the assets
 
 Assets are committed to the repo, so a `composer require` install is
-all-you-need. To rebuild from upstream sources (Twemoji + OpenMoji
-releases + Unicode CLDR), see [`scripts/README.md`](scripts/README.md).
+all-you-need. Refreshing them from upstream (new Twemoji release, new
+OpenMoji drop, new Unicode CLDR cycle) is a **maintainer-side** step
+that runs in CI via [`ichava/maintainer-toolkit`](https://github.com/ichava/maintainer-toolkit) -- the
+Docker-based toolkit that owns every pack's asset pipeline. Cron opens
+a PR with the refreshed SVGs; a human reviews + tags a new release.
 
 ## CDN endpoints (skip vendoring entirely)
 

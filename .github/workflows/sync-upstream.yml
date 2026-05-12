@@ -1,0 +1,82 @@
+# .github/workflows/sync-upstream.yml
+#
+# Drop-in template for any Ichava icon pack that wants automated
+# upstream-asset refreshes. Runs the ichava/maintainer-toolkit docker image (which
+# bundles Python + Node + gh + every fetch strategy) and opens a PR
+# when upstream has moved.
+#
+# A human reviews the PR diff and merges; the tag-driven release.yml
+# then ships the bump to Packagist.
+#
+# Required:
+#   GITHUB_TOKEN (automatic) for PR creation.
+
+name: Sync upstream
+
+on:
+  schedule:
+    # Mondays 06:45 UTC. 45-past-the-hour offset borrowed from Homebrew's
+    # autobump cron to dodge GitHub Actions' on-the-hour load spike.
+    - cron: '45 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Refresh even when current == latest (dev / debugging)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-upstream-${{ github.repository }}
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout pack repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout ichava/maintainer-toolkit (the toolkit)
+        uses: actions/checkout@v4
+        with:
+          repository: ichava/maintainer-toolkit
+          path: .ichava-maintainer-toolkit
+          # Pin to a tag in production. Floating on main is fine for
+          # the cron itself -- this is the maintainer's own tooling.
+          ref: main
+
+      - name: Configure git identity (commits go through this name)
+        run: |
+          git config user.name  "ichava-sync-bot"
+          git config user.email "19682005+imanimanyara@users.noreply.github.com"
+
+      - name: Authenticate gh for PR creation
+        run: gh auth setup-git
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run ichava-maintainer-toolkit sync via Docker
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACK_SLUG: ${{ github.event.repository.name }}
+        run: |
+          FLAGS=""
+          if [ "${{ inputs.force }}" = "true" ]; then FLAGS="$FLAGS --force"; fi
+          docker run --rm \
+            -v "$PWD/..:/work" \
+            -v "$PWD/.ichava-maintainer-toolkit/config:/app/config" \
+            -e GH_TOKEN \
+            ghcr.io/ichava/maintainer-toolkit:latest \
+            sync --pack="$PACK_SLUG" $FLAGS
+
+      - name: Clean up
+        if: always()
+        run: rm -rf .ichava-maintainer-toolkit

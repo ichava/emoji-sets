@@ -88,9 +88,9 @@
             }
         ],
         "update_command": {
-            "type": "script",
-            "path": "scripts/build_emoji_assets.py",
-            "args": ["--twemoji-version={version}"]
+            "_note": "Refresh runs in ichava/maintainer-toolkit via the `emoji-sets` recipe -- composes Twemoji (npm) + OpenMoji (github) + Unicode CLDR. No pack-side script.",
+            "type": "recipe",
+            "recipe": "emoji-sets"
         }
     }
 }
