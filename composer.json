@@ -13,7 +13,7 @@
         "unicode",
         "ichava"
     ],
-    "homepage": "https://github.com/ichava/emoji-sets",
+    "homepage": "https://opensource.simtabi.com/products/ichava/emoji-sets",
     "license": "MIT",
     "authors": [
         {
@@ -69,6 +69,7 @@
     "support": {
         "source": "https://github.com/ichava/emoji-sets",
         "issues": "https://github.com/ichava/emoji-sets/issues",
-        "security": "https://github.com/ichava/emoji-sets/security/policy"
+        "security": "https://github.com/ichava/emoji-sets/security/policy",
+        "docs": "https://opensource.simtabi.com/documentation/ichava/emoji-sets/"
     }
 }
