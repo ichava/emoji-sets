@@ -2,6 +2,18 @@
 
 All notable changes to `ichava/emoji-sets` follow [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/).
 
+## [1.0.0] - 2026-07-08
+
+### Changed (BREAKING)
+
+- Migrated to the `Simtabi\Laranail\Package\Tools` namespace
+  (laranail/package-tools 3.0 family).
+- PHP floor raised to `^8.4.1 || ^8.5`.
+- Requires `laranail/package-tools ^3.0` via `ichava/core`.
+- Composer metadata adopts the canonical OSS-portal URLs; CI test
+  matrix runs on PHP 8.4/8.5.
+
+
 ## [Unreleased]
 
 ### Added
