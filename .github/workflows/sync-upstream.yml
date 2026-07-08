@@ -80,6 +80,9 @@ jobs:
             -v "$PWD/..:/work" \
             -v "$PWD/.ichava-maintainer-toolkit/config:/app/config" \
             -e GH_TOKEN \
+            -e GIT_CONFIG_COUNT=1 \
+            -e GIT_CONFIG_KEY_0=safe.directory \
+            -e GIT_CONFIG_VALUE_0='*' \
             ichava-maintainer-toolkit:local \
             sync --pack="$PACK_SLUG" $FLAGS
 
