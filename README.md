@@ -42,16 +42,16 @@ Ichava engine.
 
 ```blade
 {{-- Full form: pick a set, then Unicode CLDR group, then emoji slug --}}
-<x-ichava-emoji-sets::icon name="twemoji/smileys-emotion/grinning-face" />
+<x-ichava-emoji-sets:icon name="twemoji/smileys-emotion/grinning-face" />
 
 {{-- Default set ("twemoji"); short form skips the set segment --}}
-<x-ichava-emoji-sets::icon name="smileys-emotion/grinning-face" />
+<x-ichava-emoji-sets:icon name="smileys-emotion/grinning-face" />
 
 {{-- Through the generic Ichava engine --}}
-<x-ichava::icon name="ichava/emoji-sets::twemoji/flags/flag-japan" />
+<x-ichava:icon name="ichava/emoji-sets:twemoji/flags/flag-japan" />
 
 {{-- Helper function --}}
-{{ ichava('ichava/emoji-sets::openmoji-black/objects/light-bulb', ['class' => 'w-6 h-6']) }}
+{{ ichava('ichava/emoji-sets:openmoji-black/objects/light-bulb', ['class' => 'w-6 h-6']) }}
 ```
 
 ## Configuration
@@ -161,6 +161,14 @@ email / dashboards.
 
 See [`ichava/documentation/icon-pack-upstream-tracking.md`](https://github.com/ichava/documentation/blob/main/icon-pack-upstream-tracking.md)
 for the full schema + how to subscribe to update events.
+
+## Pack-specific docs
+
+Vendor-specific deep dives live in this repo under [`docs/`](docs/). Anything that applies to *every* Ichava icon pack lives in the [main documentation repo](https://github.com/ichava/documentation/blob/main/README.md#icon-packs).
+
+- [Sets](docs/sets.md), Twemoji and the two OpenMoji styles
+- [Categories](docs/categories.md), the ten Unicode CLDR groups
+- [Attribution](docs/attribution.md), per-set licences. CC-BY and CC-BY-SA are not the same
 
 ## Status
 
