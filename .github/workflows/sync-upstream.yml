@@ -76,13 +76,24 @@ jobs:
         run: |
           FLAGS=""
           if [ "${{ inputs.force }}" = "true" ]; then FLAGS="$FLAGS --force"; fi
+
+          # The push happens INSIDE the container. `gh auth setup-git` ran on
+          # the runner, and actions/checkout leaves its credential in a file
+          # under RUNNER_TEMP that is not mounted here, so the container had no
+          # way to authenticate: `git push` exited 128 at the GitBranch stage,
+          # after a full and successful asset refresh. Hand it the same
+          # Authorization header actions/checkout uses. GH_TOKEN is masked in
+          # logs, and so is anything derived from it.
+          AUTH_HEADER="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
           docker run --rm \
             -v "$PWD/..:/work" \
             -v "$PWD/.ichava-maintainer-toolkit/config:/app/config" \
             -e GH_TOKEN \
-            -e GIT_CONFIG_COUNT=1 \
+            -e GIT_CONFIG_COUNT=2 \
             -e GIT_CONFIG_KEY_0=safe.directory \
             -e GIT_CONFIG_VALUE_0='*' \
+            -e GIT_CONFIG_KEY_1='http.https://github.com/.extraheader' \
+            -e GIT_CONFIG_VALUE_1="$AUTH_HEADER" \
             ichava-maintainer-toolkit:local \
             sync --pack="$PACK_SLUG" $FLAGS
 
