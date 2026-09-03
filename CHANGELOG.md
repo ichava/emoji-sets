@@ -2,6 +2,30 @@
 
 All notable changes to `ichava/emoji-sets` follow [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/).
 
+## [0.1.1] - 2026-09-02
+
+### Added
+
+- **The emoji assets.** 10,567 SVGs across three sets -- `twemoji` (3,435), `openmoji-color`
+  (3,566) and `openmoji-black` (3,566) -- categorised into the nine CLDR groups.
+
+  This package was tagged and published shipping **zero** SVGs (`V4`). A pack with no assets
+  reports clean to every scanner, which is exactly the false-clean the corpus census was
+  built to detect.
+
+  The cause was three upstream versions being conflated into one. `current_version` read
+  `17.0.0`, which `@twemoji/svg` has never published -- npm's latest is `15.0.0` -- so
+  `npm pack` failed with an empty message. The build recipe additionally defaulted the
+  Unicode emoji version to `17.0`, which Unicode has not released either, so it 404ed on
+  `emoji-test.txt` before reaching npm at all. Neither failure was visible from the shipped
+  package; it simply had nothing in it.
+
+### Changed
+
+- `resources/assets/svg/config.json` records what was actually vendored: Twemoji `15.0.0`,
+  OpenMoji `15.1.0`, Unicode CLDR `16.0`. The three are independent and are now labelled as
+  such, so the next refresh cannot repeat the conflation.
+
 ## [Unreleased]
 
 ### Not yet shipped

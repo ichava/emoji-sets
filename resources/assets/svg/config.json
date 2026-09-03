@@ -1,96 +1,112 @@
 {
-    "schema_version": "1.0",
-    "package": {
-        "name": "ichava/emoji-sets",
-        "title": "Emoji Sets",
-        "description": "Multi-source emoji bundle (Twemoji, OpenMoji color, OpenMoji black). Unicode 17 / Emoji 17 spec. Categorised by Unicode CLDR groups.",
-        "keywords": ["emoji", "twemoji", "openmoji", "svg", "unicode", "bundle"],
-        "version": "0.1.0",
-        "upstream_version": "twemoji@17.0.0 + openmoji@latest",
-        "type": "bulk",
-        "license": "MIT (code) / CC-BY 4.0 (Twemoji assets) / CC-BY-SA 4.0 (OpenMoji assets)"
-    },
-    "metadata": {
-        "authors": [
-            {
-                "name": "Twitter, Inc. and other contributors (Twemoji)",
-                "role": "Creator -- Twemoji",
-                "url": "https://github.com/jdecked/twemoji"
-            },
-            {
-                "name": "HfG Schwäbisch Gmünd + community (OpenMoji)",
-                "role": "Creator -- OpenMoji",
-                "url": "https://openmoji.org/"
-            }
-        ],
-        "homepage": "https://github.com/ichava/emoji-sets",
-        "repository": "https://github.com/ichava/emoji-sets",
-        "data": {
-            "variants": {
-                "default": {
-                    "name": "Default",
-                    "slug": "default",
-                    "description": "Standard emoji style from each source set",
-                    "default": true,
-                    "icon_suffix": "",
-                    "display_order": 1,
-                    "attributes": {},
-                    "color_scheme": "adaptive"
-                }
-            },
-            "categories": {
-                "twemoji": {
-                    "name": "Twemoji",
-                    "description": "Twitter/X's open-source emoji set (CC-BY 4.0). Recognisable rounded colourful style. Default set.",
-                    "sets": ["twemoji"]
-                },
-                "openmoji-color": {
-                    "name": "OpenMoji Color",
-                    "description": "Community-driven flat colourful emojis from HfG Schwäbisch Gmünd (CC-BY-SA 4.0).",
-                    "sets": ["openmoji-color"]
-                },
-                "openmoji-black": {
-                    "name": "OpenMoji Black",
-                    "description": "Monochrome outline variant of OpenMoji (CC-BY-SA 4.0). Ideal for single-colour designs.",
-                    "sets": ["openmoji-black"]
-                }
-            }
+  "schema_version": "1.0",
+  "package": {
+    "name": "ichava/emoji-sets",
+    "title": "Emoji Sets",
+    "description": "Multi-source emoji bundle (Twemoji, OpenMoji color, OpenMoji black). Unicode 17 / Emoji 17 spec. Categorised by Unicode CLDR groups.",
+    "keywords": [
+      "emoji",
+      "twemoji",
+      "openmoji",
+      "svg",
+      "unicode",
+      "bundle"
+    ],
+    "version": "0.1.0",
+    "upstream_version": "twemoji@17.0.0 + openmoji@latest",
+    "type": "bulk",
+    "license": "MIT (code) / CC-BY 4.0 (Twemoji assets) / CC-BY-SA 4.0 (OpenMoji assets)"
+  },
+  "metadata": {
+    "authors": [
+      {
+        "name": "Twitter, Inc. and other contributors (Twemoji)",
+        "role": "Creator -- Twemoji",
+        "url": "https://github.com/jdecked/twemoji"
+      },
+      {
+        "name": "HfG Schwäbisch Gmünd + community (OpenMoji)",
+        "role": "Creator -- OpenMoji",
+        "url": "https://openmoji.org/"
+      }
+    ],
+    "homepage": "https://github.com/ichava/emoji-sets",
+    "repository": "https://github.com/ichava/emoji-sets",
+    "data": {
+      "variants": {
+        "default": {
+          "name": "Default",
+          "slug": "default",
+          "description": "Standard emoji style from each source set",
+          "default": true,
+          "icon_suffix": "",
+          "display_order": 1,
+          "attributes": {},
+          "color_scheme": "adaptive"
         }
-    },
-    "config": {
-        "icon_prefix": "emoji"
-    },
-    "upstream": {
-        "_comment": "Multi-source pack: each emoji set has its own upstream. The checker treats `source` as the primary tracker; supplementary sources live under `additional_sources` for documentation + future per-set checking.",
-        "source": {
-            "type": "npm",
-            "package": "@twemoji/svg",
-            "_why_npm": "NPM publishes new Twemoji releases the same day as GitHub but with no rate-limit ceiling and a simpler API contract."
+      },
+      "categories": {
+        "twemoji": {
+          "name": "Twemoji",
+          "description": "Twitter/X's open-source emoji set (CC-BY 4.0). Recognisable rounded colourful style. Default set.",
+          "sets": [
+            "twemoji"
+          ]
         },
-        "current_version": "17.0.0",
-        "version_check_url": "https://registry.npmjs.org/@twemoji/svg/latest",
-        "license": "CC-BY 4.0 (Twemoji assets) + CC-BY-SA 4.0 (OpenMoji assets)",
-        "cdn": {
-            "twemoji_jsdelivr": "https://cdn.jsdelivr.net/npm/@twemoji/svg@{version}/{codepoint}.svg",
-            "twemoji_unpkg": "https://unpkg.com/@twemoji/svg@{version}/{codepoint}.svg",
-            "twemoji_github_raw": "https://raw.githubusercontent.com/jdecked/twemoji/v{version}/assets/svg/{codepoint}.svg",
-            "openmoji_color_jsdelivr": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji@latest/color/svg/{codepoint}.svg",
-            "openmoji_black_jsdelivr": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji@latest/black/svg/{codepoint}.svg"
+        "openmoji-color": {
+          "name": "OpenMoji Color",
+          "description": "Community-driven flat colourful emojis from HfG Schwäbisch Gmünd (CC-BY-SA 4.0).",
+          "sets": [
+            "openmoji-color"
+          ]
         },
-        "additional_sources": [
-            {
-                "name": "openmoji",
-                "type": "github",
-                "owner": "hfg-gmuend",
-                "repo": "openmoji",
-                "version_check_url": "https://api.github.com/repos/hfg-gmuend/openmoji/releases/latest",
-                "license": "CC-BY-SA 4.0"
-            }
-        ],
-        "update_command": {
-            "_note": "Refresh runs in ichava/maintainer-toolkit via the `emoji-sets` recipe -- composes Twemoji (npm) + OpenMoji (github) + Unicode CLDR. No pack-side script.",
-            "type": "recipe",
-            "recipe": "emoji-sets"
+        "openmoji-black": {
+          "name": "OpenMoji Black",
+          "description": "Monochrome outline variant of OpenMoji (CC-BY-SA 4.0). Ideal for single-colour designs.",
+          "sets": [
+            "openmoji-black"
+          ]
         }
+      }
     }
+  },
+  "config": {
+    "icon_prefix": "emoji"
+  },
+  "upstream": {
+    "_comment": "Multi-source pack: each emoji set has its own upstream. The checker treats `source` as the primary tracker; supplementary sources live under `additional_sources` for documentation + future per-set checking.",
+    "source": {
+      "type": "npm",
+      "package": "@twemoji/svg",
+      "_why_npm": "NPM publishes new Twemoji releases the same day as GitHub but with no rate-limit ceiling and a simpler API contract."
+    },
+    "current_version": "15.0.0",
+    "version_check_url": "https://registry.npmjs.org/@twemoji/svg/latest",
+    "license": "CC-BY 4.0 (Twemoji assets) + CC-BY-SA 4.0 (OpenMoji assets)",
+    "cdn": {
+      "twemoji_jsdelivr": "https://cdn.jsdelivr.net/npm/@twemoji/svg@{version}/{codepoint}.svg",
+      "twemoji_unpkg": "https://unpkg.com/@twemoji/svg@{version}/{codepoint}.svg",
+      "twemoji_github_raw": "https://raw.githubusercontent.com/jdecked/twemoji/v{version}/assets/svg/{codepoint}.svg",
+      "openmoji_color_jsdelivr": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji@latest/color/svg/{codepoint}.svg",
+      "openmoji_black_jsdelivr": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji@latest/black/svg/{codepoint}.svg"
+    },
+    "additional_sources": [
+      {
+        "name": "openmoji",
+        "type": "github",
+        "owner": "hfg-gmuend",
+        "repo": "openmoji",
+        "version_check_url": "https://api.github.com/repos/hfg-gmuend/openmoji/releases/latest",
+        "license": "CC-BY-SA 4.0",
+        "current_version": "15.1.0"
+      }
+    ],
+    "update_command": {
+      "_note": "Refresh runs in ichava/maintainer-toolkit via the `emoji-sets` recipe -- composes Twemoji (npm) + OpenMoji (github) + Unicode CLDR. No pack-side script.",
+      "type": "recipe",
+      "recipe": "emoji-sets"
+    },
+    "_vendored_note": "Versions of the three upstreams that produced the shipped assets. They move independently and conflating them is what left this pack empty: current_version read 17.0.0, which @twemoji/svg has never published, so `npm pack` failed and no assets were ever written (V4). Twemoji 15.0.0 is npm's latest; OpenMoji 15.1.0 is a released tag; Unicode emoji 16.0 is the newest emoji-test.txt that exists and is what the CLDR categorisation used.",
+    "cldr_version": "16.0"
+  }
 }
