@@ -18,3 +18,4 @@ scripts/.downloads/
 # CI checks ichava/maintainer-toolkit out here (sync-upstream.yml).
 # Never track it: a nested repo is recorded as a phantom gitlink.
 /.ichava-maintainer-toolkit/
+/.phpstan.cache

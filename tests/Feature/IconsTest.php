@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Ichava\EmojiSets\Tests\Feature;
 
-use Simtabi\Laranail\Ichava\EmojiSets\Constants\IconsConstants;
-use Simtabi\Laranail\Ichava\EmojiSets\Enums\Category;
 use Simtabi\Laranail\Ichava\EmojiSets\Enums\Set;
-use Simtabi\Laranail\Ichava\EmojiSets\Providers\IconsServiceProvider;
-use Simtabi\Laranail\Ichava\EmojiSets\Tests\TestCase;
 use Simtabi\Laranail\Ichava\Services\IconRegistry;
+use Simtabi\Laranail\Ichava\EmojiSets\Enums\Category;
+use Simtabi\Laranail\Ichava\EmojiSets\Tests\TestCase;
+use Simtabi\Laranail\Ichava\EmojiSets\Constants\IconsConstants;
+use Simtabi\Laranail\Ichava\EmojiSets\Providers\IconsServiceProvider;
 
 class IconsTest extends TestCase
 {
@@ -19,7 +19,7 @@ class IconsTest extends TestCase
 
         $this->assertContains(
             IconsServiceProvider::class,
-            $providers
+            $providers,
         );
     }
 
@@ -89,7 +89,7 @@ class IconsTest extends TestCase
 
         $this->assertTrue(
             $registry->isRegistered('ichava/emoji-sets'),
-            'IconRegistry should have ichava/emoji-sets registered after boot.'
+            'IconRegistry should have ichava/emoji-sets registered after boot.',
         );
     }
 }
