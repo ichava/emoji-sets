@@ -150,7 +150,7 @@ URL on the fly.
 This pack participates in Ichava's upstream-tracking system. Run
 
 ```bash
-php artisan ichava:icons:check-updates --package=ichava/emoji-sets
+php artisan ichava::ichava-core.check-updates --package=ichava/emoji-sets
 ```
 
 to see whether a newer Twemoji or OpenMoji release exists. The check
