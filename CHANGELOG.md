@@ -2,6 +2,41 @@
 
 All notable changes to `ichava/emoji-sets` follow [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/).
 
+## [0.2.0] - 2026-09-16
+
+### Breaking
+
+- **Requires `ichava/core: ^0.2`.** Core `0.2.0` moved its config key to
+  `ichava.ichava-core.*` and renamed every Artisan command with no bare aliases, so a host
+  application upgrading this pack has to upgrade core with it.
+
+### Added
+
+- `release.yml` — a `v*.*.*` tag now publishes a release whose body is that version's CHANGELOG
+  section. It fails closed when the tagged version has no section, so a tag pointing at the
+  wrong commit stops rather than publishing auto-generated notes.
+- A `code-quality` workflow and the six composer scripts (`pint`, `pint-fix`, `lint`, `format`,
+  `test`, `analyse`), with `phpstan/phpstan` at level 0. This pack had `laranail-pint` vendored
+  but no script and no gate, so nothing ran the formatter and the code had drifted from the
+  shared preset.
+- Removed a stale `lint` job that invoked raw `vendor/bin/pint --test` instead of
+  `laranail-pint`. It used Pint's default rules, so it contradicted the shared preset by
+  construction and the repo could not satisfy both at once.
+
+### Changed
+
+- Third-party GitHub Actions pinned to the commit SHA of their latest release; `actions/*` keep
+  floating on a major tag. A tag is mutable, so `@v4` is a promise the action's owner can
+  rewrite — `tj-actions/changed-files` had every tag retagged to secret-dumping code in March
+  2025. Pinning GitHub's own actions inside GitHub's own runner buys nothing, so they are left
+  alone.
+- The test harness reads `DB_CONNECTION`, so the suite targets SQLite, PostgreSQL, MySQL or
+  MariaDB — the same environment variables as `ichava/core` and `ichava/browser`. SQLite runs
+  enable `foreign_key_constraints`, which Laravel only applies when the key is present.
+- Documentation names the renamed commands. The old bare names are gone rather than aliased, so
+  a README telling someone to run `php artisan ichava:database seed` named a command that no
+  longer exists.
+
 ## [0.1.1] - 2026-09-02
 
 ### Added

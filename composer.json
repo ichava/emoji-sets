@@ -49,8 +49,7 @@
     ],
     "require-dev": {
         "orchestra/testbench": "^11.0",
-        "pestphp/pest": "^3.0",
-        "phpunit/phpunit": "^10.0|^11.0",
+        "pestphp/pest": "^4.6 || ^5.0",
         "laravel/pint": "^1.18",
         "phpstan/phpstan": "^2.1"
     },
