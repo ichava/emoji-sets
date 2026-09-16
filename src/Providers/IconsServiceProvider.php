@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Ichava\EmojiSets\Providers;
 
-use Simtabi\Laranail\Ichava\EmojiSets\Constants\IconsConstants;
-use Simtabi\Laranail\Ichava\EmojiSets\View\Components\IconComponent;
+use Simtabi\Laranail\Package\Tools\Package;
 use Simtabi\Laranail\Ichava\Services\IconRegistry;
 use Simtabi\Laranail\Ichava\Support\ServiceProvider;
-use Simtabi\Laranail\Package\Tools\Exceptions\InvalidPackage;
 use Simtabi\Laranail\Package\Tools\Exceptions\InvalidPath;
-use Simtabi\Laranail\Package\Tools\Package;
+use Simtabi\Laranail\Package\Tools\Exceptions\InvalidPackage;
+use Simtabi\Laranail\Ichava\EmojiSets\Constants\IconsConstants;
+use Simtabi\Laranail\Ichava\EmojiSets\View\Components\IconComponent;
 
 /**
  * Registers the multi-set emoji collection with the Ichava registry.

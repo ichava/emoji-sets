@@ -31,25 +31,6 @@ enum Category: string
     case FLAGS = 'flags';
 
     /**
-     * Human-readable display name for picker UIs.
-     */
-    public function label(): string
-    {
-        return match ($this) {
-            self::SMILEYS_EMOTION => 'Smileys & Emotion',
-            self::PEOPLE_BODY => 'People & Body',
-            self::COMPONENT => 'Component',
-            self::ANIMALS_NATURE => 'Animals & Nature',
-            self::FOOD_DRINK => 'Food & Drink',
-            self::TRAVEL_PLACES => 'Travel & Places',
-            self::ACTIVITIES => 'Activities',
-            self::OBJECTS => 'Objects',
-            self::SYMBOLS => 'Symbols',
-            self::FLAGS => 'Flags',
-        };
-    }
-
-    /**
      * All categories in their canonical Unicode display order.
      *
      * @return list<self>
@@ -68,5 +49,24 @@ enum Category: string
             self::SYMBOLS,
             self::FLAGS,
         ];
+    }
+
+    /**
+     * Human-readable display name for picker UIs.
+     */
+    public function label(): string
+    {
+        return match ($this) {
+            self::SMILEYS_EMOTION => 'Smileys & Emotion',
+            self::PEOPLE_BODY     => 'People & Body',
+            self::COMPONENT       => 'Component',
+            self::ANIMALS_NATURE  => 'Animals & Nature',
+            self::FOOD_DRINK      => 'Food & Drink',
+            self::TRAVEL_PLACES   => 'Travel & Places',
+            self::ACTIVITIES      => 'Activities',
+            self::OBJECTS         => 'Objects',
+            self::SYMBOLS         => 'Symbols',
+            self::FLAGS           => 'Flags',
+        };
     }
 }

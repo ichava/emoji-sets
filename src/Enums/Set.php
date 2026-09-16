@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Ichava\EmojiSets\Enums;
 
+use Simtabi\Laranail\Ichava\Traits\HasIconSetVariants;
 use Simtabi\Laranail\Ichava\Contracts\IconSetVariantInterface;
 use Simtabi\Laranail\Ichava\EmojiSets\Constants\IconsConstants;
-use Simtabi\Laranail\Ichava\Traits\HasIconSetVariants;
 
 /**
  * The emoji *source* (style/artist).
@@ -32,12 +32,12 @@ enum Set: string implements IconSetVariantInterface
         return IconsConstants::getSvgPath($this->value);
     }
 
-    protected static function getDefaultValue(): string
+    private static function getDefaultValue(): string
     {
         return IconsConstants::getDefaultCategory() ?? self::TWEMOJI->value;
     }
 
-    protected static function getClassPrefix(): string
+    private static function getClassPrefix(): string
     {
         return IconsConstants::getPrefix();
     }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Ichava\EmojiSets\Constants;
 
-use Simtabi\Laranail\Ichava\Constants\JsonConfigConstants;
 use Simtabi\Laranail\Ichava\Support\PathResolver;
+use Simtabi\Laranail\Ichava\Constants\JsonConfigConstants;
 
 /**
  * Resolves emoji-sets metadata from its `resources/assets/svg/config.json`.
