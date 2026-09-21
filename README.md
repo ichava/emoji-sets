@@ -69,12 +69,15 @@ return [
 ];
 ```
 
-## Sets (once Phase A1 lands)
+## Sets
+
+All three ship today. Versions are the upstream releases that produced the vendored assets, and
+they move independently -- `resources/assets/svg/config.json` is the source of truth for each.
 
 | Set | Style | Source | Assets licence |
 |---|---|---|---|
-| `twemoji` (default) | Detailed colourful (Twitter/X look) | [jdecked/twemoji v17.0.0](https://github.com/jdecked/twemoji) | CC-BY 4.0 |
-| `openmoji-color` | Flat colourful, outlined | [hfg-gmuend/openmoji](https://github.com/hfg-gmuend/openmoji) | CC-BY-SA 4.0 |
+| `twemoji` (default) | Detailed colourful (Twitter/X look) | [jdecked/twemoji v15.1.0](https://github.com/jdecked/twemoji) | CC-BY 4.0 |
+| `openmoji-color` | Flat colourful, outlined | [hfg-gmuend/openmoji 15.1.0](https://github.com/hfg-gmuend/openmoji) | CC-BY-SA 4.0 |
 | `openmoji-black` | Monochrome outline | Same as above | CC-BY-SA 4.0 |
 
 See [`ATTRIBUTION.md`](ATTRIBUTION.md) for full attribution requirements.
