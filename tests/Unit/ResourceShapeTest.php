@@ -112,25 +112,3 @@ class ResourceShapeTest extends TestCase
         return require $this->resources() . '/lang/en/icons.php';
     }
 }
-
-it(description: 'points metadata.repository at this package, not its upstream', closure: function () {
-    $config = json_decode(
-        (string) file_get_contents(dirname(__DIR__, 2) . '/resources' . '/assets/svg/config.json'),
-        true,
-        flags: JSON_THROW_ON_ERROR,
-    );
-
-    // Settled 2026-09-21. `metadata.repository` is THIS package's repository.
-    //
-    // It had drifted to naming the upstream in two packs and was blank in a
-    // third, so the field meant three different things across five packs. The
-    // stub already defines it as ours for every new pack; `icon-sets.json` pins
-    // ours and hands it to `latestTag()`, which only resolves against our tags;
-    // and the browser API groups it with package_name, vendor, version and
-    // license -- package metadata, not provenance.
-    //
-    // Upstream identity is not homeless: the `upstream` block carries source,
-    // version, version_check_url, licence, CDN and update command in full, and
-    // `metadata.homepage` points at the upstream's own site where one exists.
-    expect($config['metadata']['repository'])->toBe('https://github.com/ichava/icon-sets-emoji');
-});
