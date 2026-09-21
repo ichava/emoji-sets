@@ -26,7 +26,7 @@
     "require": {
         "php": "^8.4.1 || ^8.5",
         "illuminate/support": "^13.0",
-        "ichava/core": "^0.2.4",
+        "ichava/core": "^0.2.5",
         "laranail/package-tools": "^0.1.0"
     },
     "repositories": [
