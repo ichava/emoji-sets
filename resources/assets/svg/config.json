@@ -13,7 +13,7 @@
       "bundle"
     ],
     "version": "0.1.0",
-    "upstream_version": "twemoji@17.0.0 + openmoji@latest",
+    "upstream_version": "15.0.0",
     "type": "bulk",
     "license": "MIT (code) / CC-BY 4.0 (Twemoji assets) / CC-BY-SA 4.0 (OpenMoji assets)"
   },
