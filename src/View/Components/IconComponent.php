@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Simtabi\Laranail\Ichava\EmojiSets\View\Components;
+namespace Simtabi\Laranail\Ichava\IconSetsEmoji\View\Components;
 
-use Simtabi\Laranail\Ichava\EmojiSets\Constants\IconsConstants;
+use Simtabi\Laranail\Ichava\IconSetsEmoji\Constants\IconsConstants;
 use Simtabi\Laranail\Ichava\View\Components\IconComponent as BaseIconComponent;
 
 /**
@@ -19,7 +19,7 @@ use Simtabi\Laranail\Ichava\View\Components\IconComponent as BaseIconComponent;
  *   <x-ichava-emoji-sets::icon name="smileys-emotion/grinning-face" />
  *
  *   {{-- Via the generic Ichava engine --}}
- *   <x-ichava::icon name="ichava/emoji-sets::twemoji/flags/flag-japan" />
+ *   <x-ichava::icon name="ichava/icon-sets-emoji::twemoji/flags/flag-japan" />
  */
 class IconComponent extends BaseIconComponent
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Simtabi\Laranail\Ichava\EmojiSets\Tests;
+namespace Simtabi\Laranail\Ichava\IconSetsEmoji\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
 use Simtabi\Laranail\Ichava\Providers\IchavaServiceProvider;
-use Simtabi\Laranail\Ichava\EmojiSets\Providers\IconsServiceProvider;
+use Simtabi\Laranail\Ichava\IconSetsEmoji\Providers\IconsServiceProvider;
 
 abstract class TestCase extends Orchestra
 {

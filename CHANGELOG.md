@@ -1,6 +1,123 @@
 # Changelog
 
-All notable changes to `ichava/emoji-sets` follow [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/).
+All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/).
+
+## [0.3.0] - 2026-09-21
+
+### Changed
+
+- **Renamed to `ichava/icon-sets-emoji`.** The composer package, the GitHub repository and the local
+  directory now all read `icon-sets-emoji`, restoring the one-name rule the ecosystem relies on.
+
+  **Breaking, and that is why the minor moves.** A `0.x` caret pins the minor, so `^0.2` will
+  not resolve to `0.3.0` -- consumers move deliberately rather than by accident.
+
+  | Surface | Was | Now |
+  |---|---|---|
+  | Composer package | `ichava/emoji-sets` | `ichava/icon-sets-emoji` |
+  | PHP namespace | `Simtabi\Laranail\Ichava\EmojiSets` | `Simtabi\Laranail\Ichava\IconSetsEmoji` |
+  | Config file and key | `config/emoji-sets.php` | `config/icon-sets-emoji.php` |
+
+  The config **filename** must match the package short name or the key silently doubles and
+  every `config()` read returns `null` -- the `V39` defect that once left an entire shipped
+  config inert.
+
+  **Upstream references are deliberately untouched.** The vendor this pack tracks shares the
+  token with our old name; a blanket rename would have aimed the update checker at a package
+  that does not exist and broken the CDN templates, failing in a host app rather than in CI.
+
+## [0.2.6] - 2026-09-21
+
+### Added
+
+- **`actionlint` runs on every pull request.** Nothing validated the workflow files at all:
+  `release.yml` triggers only on `push: tags`, so a broken workflow was first observed as a
+  release that refused to start — after the decision to release had been made.
+
+  A YAML parse is not a substitute, and that is the sharp part. `yaml.safe_load` accepts a
+  duplicate key and silently keeps the last one, so a double-applied patch that left
+  `continue-on-error:` twice on a single step validated clean and would have failed only at tag
+  time. `actionlint` rejects what Actions rejects.
+
+  Checked against the defect rather than assumed: injecting that duplicate key, a typo'd step
+  key, and an `if:` referencing a property that does not exist are all caught, while
+  `yaml.safe_load` still parses the first of them without complaint.
+
+### Fixed
+
+- **`tests/Unit/` was never run.** `phpunit.xml.dist` declared a `Feature`
+  testsuite and nothing else, so any unit test added here would have passed
+  locally when invoked by path and been silently skipped by `composer test` and
+  by CI. Every other pack in the family declares both suites; this one did not.
+
+  It nearly hid itself. The `Feature` suite is 7 tests / 15 assertions, and the
+  unit test added in this change is **also** 7 tests / 15 assertions, so the
+  totals matched exactly whether or not the new file ran.
+
+### Added
+
+- **`resources/lang/` and `resources/views/`, bringing this pack to the canonical
+  resource shape.** It shipped neither.
+
+  This is the only pack in the family with two taxonomies, so it is the only one
+  whose lang file carries both `sets` (3 cases) and `categories` (10 cases),
+  each with descriptions. Set names are proper nouns from their upstream
+  projects and are not translated; their descriptions are.
+
+  `name` and `description` are **deliberately omitted**: `IconRegistry` reads
+  those from `resources/assets/svg/config.json`, which is canonical, and the
+  packs that kept a second copy had already drifted from it unnoticed.
+
+  `views/components/` is an empty placeholder kept for family consistency.
+  Nothing registers it -- the component path renders SVG directly.
+
+  `tests/Unit/ResourceShapeTest.php` pins the shape, holds both enums in step,
+  and asserts every `Set` case has a directory under `files/` -- a lang key
+  naming a set that does not ship is as wrong as one that does not exist.
+
+  > Nothing loads these translations yet. No pack calls `hasTranslations()`.
+
+### Fixed
+
+- **A failed SBOM download no longer takes the whole release down.** `release.yml` generates the
+  SBOM before it publishes, and the Syft installer fetches its checksums from GitHub's
+  release-asset CDN. On 2026-09-21 that answered `504` for about twenty minutes, failing the job
+  four times *before* the publish step — so the tag existed with no release behind it, which is
+  the drift the release table exists to catch, produced by the release machinery itself.
+
+  Two changes. The step now retries once after 45 seconds, which covers a single transient `504`
+  — the common case. And a second failure no longer fails the job: the release publishes without
+  the asset and emits a `::warning::` naming the re-run.
+
+  **The two failure states are not equally bad, and that asymmetry is the whole design.** A
+  release missing an attachment is repaired by re-running this workflow, which re-attaches it. A
+  tag with no release persists silently until a person notices. Preferring the recoverable one
+  is worth the loss of "every release always carries an SBOM" as an absolute.
+
+  `fail_on_unmatched_files: false` is now stated on the publish step. It is already the action's
+  default, but the point of this change is that a missing SBOM must not fail the publish, so it
+  should not rest on a default a future reader has to know.
+
+### Not yet shipped
+
+- **The emoji SVG assets.** The package ships the engine wiring and the
+  upstream/CDN metadata; it vendors no SVGs (`find . -name '*.svg'` returns 0).
+  The ETL that assembles them lives in
+  [`ichava/maintainer-toolkit`](https://github.com/ichava/maintainer-toolkit)
+  as `recipes/emoji_sets.py` with `config/emoji-sets.json`, and the assets are
+  intended to land through an automated pull request. Until they do, use the
+  CDN URLs documented in the README.
+
+### Security
+
+- **Floor raised to `ichava/core: ^0.2.8`.** Core `0.2.8` fixes two issues a pack inherits
+  through the engine: `%` and `_` in a search query acted as `LIKE` wildcards, widening results
+  and forcing full-table scans; and the icon watcher followed symlinks and read files of
+  unbounded size, so a link inside a watched directory pointed the reader anywhere on disk.
+
+  `^0.2.5` still permitted resolving to `0.2.5`, `0.2.6` or `0.2.7`, all of which carry both.
+  The `|| ^0.3` arm is unchanged — core `0.3.0` moved the scaffolder out but left the engine,
+  registry, seeder and SVG pipeline untouched, so an installed pack is unaffected by it.
 
 ## [0.2.5] - 2026-09-21
 
@@ -117,99 +234,6 @@ All notable changes to `ichava/emoji-sets` follow [Keep a Changelog](https://kee
 - `resources/assets/svg/config.json` records what was actually vendored: Twemoji `15.0.0`,
   OpenMoji `15.1.0`, Unicode CLDR `16.0`. The three are independent and are now labelled as
   such, so the next refresh cannot repeat the conflation.
-
-## [0.2.6] - 2026-09-21
-
-### Added
-
-- **`actionlint` runs on every pull request.** Nothing validated the workflow files at all:
-  `release.yml` triggers only on `push: tags`, so a broken workflow was first observed as a
-  release that refused to start — after the decision to release had been made.
-
-  A YAML parse is not a substitute, and that is the sharp part. `yaml.safe_load` accepts a
-  duplicate key and silently keeps the last one, so a double-applied patch that left
-  `continue-on-error:` twice on a single step validated clean and would have failed only at tag
-  time. `actionlint` rejects what Actions rejects.
-
-  Checked against the defect rather than assumed: injecting that duplicate key, a typo'd step
-  key, and an `if:` referencing a property that does not exist are all caught, while
-  `yaml.safe_load` still parses the first of them without complaint.
-
-### Fixed
-
-- **`tests/Unit/` was never run.** `phpunit.xml.dist` declared a `Feature`
-  testsuite and nothing else, so any unit test added here would have passed
-  locally when invoked by path and been silently skipped by `composer test` and
-  by CI. Every other pack in the family declares both suites; this one did not.
-
-  It nearly hid itself. The `Feature` suite is 7 tests / 15 assertions, and the
-  unit test added in this change is **also** 7 tests / 15 assertions, so the
-  totals matched exactly whether or not the new file ran.
-
-### Added
-
-- **`resources/lang/` and `resources/views/`, bringing this pack to the canonical
-  resource shape.** It shipped neither.
-
-  This is the only pack in the family with two taxonomies, so it is the only one
-  whose lang file carries both `sets` (3 cases) and `categories` (10 cases),
-  each with descriptions. Set names are proper nouns from their upstream
-  projects and are not translated; their descriptions are.
-
-  `name` and `description` are **deliberately omitted**: `IconRegistry` reads
-  those from `resources/assets/svg/config.json`, which is canonical, and the
-  packs that kept a second copy had already drifted from it unnoticed.
-
-  `views/components/` is an empty placeholder kept for family consistency.
-  Nothing registers it -- the component path renders SVG directly.
-
-  `tests/Unit/ResourceShapeTest.php` pins the shape, holds both enums in step,
-  and asserts every `Set` case has a directory under `files/` -- a lang key
-  naming a set that does not ship is as wrong as one that does not exist.
-
-  > Nothing loads these translations yet. No pack calls `hasTranslations()`.
-
-### Fixed
-
-- **A failed SBOM download no longer takes the whole release down.** `release.yml` generates the
-  SBOM before it publishes, and the Syft installer fetches its checksums from GitHub's
-  release-asset CDN. On 2026-09-21 that answered `504` for about twenty minutes, failing the job
-  four times *before* the publish step — so the tag existed with no release behind it, which is
-  the drift the release table exists to catch, produced by the release machinery itself.
-
-  Two changes. The step now retries once after 45 seconds, which covers a single transient `504`
-  — the common case. And a second failure no longer fails the job: the release publishes without
-  the asset and emits a `::warning::` naming the re-run.
-
-  **The two failure states are not equally bad, and that asymmetry is the whole design.** A
-  release missing an attachment is repaired by re-running this workflow, which re-attaches it. A
-  tag with no release persists silently until a person notices. Preferring the recoverable one
-  is worth the loss of "every release always carries an SBOM" as an absolute.
-
-  `fail_on_unmatched_files: false` is now stated on the publish step. It is already the action's
-  default, but the point of this change is that a missing SBOM must not fail the publish, so it
-  should not rest on a default a future reader has to know.
-
-### Not yet shipped
-
-- **The emoji SVG assets.** The package ships the engine wiring and the
-  upstream/CDN metadata; it vendors no SVGs (`find . -name '*.svg'` returns 0).
-  The ETL that assembles them lives in
-  [`ichava/maintainer-toolkit`](https://github.com/ichava/maintainer-toolkit)
-  as `recipes/emoji_sets.py` with `config/emoji-sets.json`, and the assets are
-  intended to land through an automated pull request. Until they do, use the
-  CDN URLs documented in the README.
-
-### Security
-
-- **Floor raised to `ichava/core: ^0.2.8`.** Core `0.2.8` fixes two issues a pack inherits
-  through the engine: `%` and `_` in a search query acted as `LIKE` wildcards, widening results
-  and forcing full-table scans; and the icon watcher followed symlinks and read files of
-  unbounded size, so a link inside a watched directory pointed the reader anywhere on disk.
-
-  `^0.2.5` still permitted resolving to `0.2.5`, `0.2.6` or `0.2.7`, all of which carry both.
-  The `|| ^0.3` arm is unchanged — core `0.3.0` moved the scaffolder out but left the engine,
-  registry, seeder and SVG pipeline untouched, so an installed pack is unaffected by it.
 
 ## [0.1.0] - 2026-08-31
 

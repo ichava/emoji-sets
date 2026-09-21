@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Simtabi\Laranail\Ichava\EmojiSets\Enums;
+namespace Simtabi\Laranail\Ichava\IconSetsEmoji\Enums;
 
 /**
  * Unicode CLDR emoji groups.

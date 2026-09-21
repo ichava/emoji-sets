@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Simtabi\Laranail\Ichava\EmojiSets\Providers;
+namespace Simtabi\Laranail\Ichava\IconSetsEmoji\Providers;
 
 use Simtabi\Laranail\Package\Tools\Package;
 use Simtabi\Laranail\Ichava\Services\IconRegistry;
 use Simtabi\Laranail\Ichava\Support\ServiceProvider;
 use Simtabi\Laranail\Package\Tools\Exceptions\InvalidPath;
 use Simtabi\Laranail\Package\Tools\Exceptions\InvalidPackage;
-use Simtabi\Laranail\Ichava\EmojiSets\Constants\IconsConstants;
-use Simtabi\Laranail\Ichava\EmojiSets\View\Components\IconComponent;
+use Simtabi\Laranail\Ichava\IconSetsEmoji\Constants\IconsConstants;
+use Simtabi\Laranail\Ichava\IconSetsEmoji\View\Components\IconComponent;
 
 /**
  * Registers the multi-set emoji collection with the Ichava registry.
@@ -36,12 +36,12 @@ class IconsServiceProvider extends ServiceProvider
         $package
             ->setName(IconsConstants::getVendorPackage())
             ->setPathFrom(source: $this, levelsUp: 2)
-            ->hasConfigFile('emoji-sets');
+            ->hasConfigFile('icon-sets-emoji');
     }
 
     public function bootingPackage(): void
     {
-        $this->loadBladeComponent(componentClass: IconComponent::class, packageName: 'emoji-sets');
+        $this->loadBladeComponent(componentClass: IconComponent::class, packageName: 'icon-sets-emoji');
 
         $this->app->make(IconRegistry::class)->fromDirectory(
             $this->package->basePath('resources/assets/svg'),

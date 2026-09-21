@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Simtabi\Laranail\Ichava\EmojiSets\Tests\Feature;
+namespace Simtabi\Laranail\Ichava\IconSetsEmoji\Tests\Feature;
 
-use Simtabi\Laranail\Ichava\EmojiSets\Enums\Set;
+use Simtabi\Laranail\Ichava\IconSetsEmoji\Enums\Set;
 use Simtabi\Laranail\Ichava\Services\IconRegistry;
-use Simtabi\Laranail\Ichava\EmojiSets\Enums\Category;
-use Simtabi\Laranail\Ichava\EmojiSets\Tests\TestCase;
-use Simtabi\Laranail\Ichava\EmojiSets\Constants\IconsConstants;
-use Simtabi\Laranail\Ichava\EmojiSets\Providers\IconsServiceProvider;
+use Simtabi\Laranail\Ichava\IconSetsEmoji\Enums\Category;
+use Simtabi\Laranail\Ichava\IconSetsEmoji\Tests\TestCase;
+use Simtabi\Laranail\Ichava\IconSetsEmoji\Constants\IconsConstants;
+use Simtabi\Laranail\Ichava\IconSetsEmoji\Providers\IconsServiceProvider;
 
 class IconsTest extends TestCase
 {
@@ -25,7 +25,7 @@ class IconsTest extends TestCase
 
     public function test_constants_resolve_from_config_json(): void
     {
-        $this->assertSame('ichava/emoji-sets', IconsConstants::getVendorPackage());
+        $this->assertSame('ichava/icon-sets-emoji', IconsConstants::getVendorPackage());
         $this->assertSame('Emoji Sets', IconsConstants::getTitle());
         $this->assertSame('emoji', IconsConstants::getPrefix());
     }
@@ -88,8 +88,8 @@ class IconsTest extends TestCase
         $registry = $this->app->make(IconRegistry::class);
 
         $this->assertTrue(
-            $registry->isRegistered('ichava/emoji-sets'),
-            'IconRegistry should have ichava/emoji-sets registered after boot.',
+            $registry->isRegistered('ichava/icon-sets-emoji'),
+            'IconRegistry should have ichava/icon-sets-emoji registered after boot.',
         );
     }
 }
