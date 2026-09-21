@@ -118,13 +118,18 @@ templates are:
 ### Twemoji (recommended; CC-BY 4.0)
 
 ```
-https://cdn.jsdelivr.net/npm/@twemoji/svg@17.0.0/{codepoint}.svg
-https://unpkg.com/@twemoji/svg@17.0.0/{codepoint}.svg
-https://raw.githubusercontent.com/jdecked/twemoji/v17.0.0/assets/svg/{codepoint}.svg
+https://cdn.jsdelivr.net/npm/@twemoji/svg@15.0.0/{codepoint}.svg
+https://unpkg.com/@twemoji/svg@15.0.0/{codepoint}.svg
+https://raw.githubusercontent.com/jdecked/twemoji/v15.1.0/assets/svg/{codepoint}.svg
 ```
 
 `{codepoint}` is the dash-joined hex codepoint (e.g. `1f600` for 😀,
 `1f1fa-1f1f8` for 🇺🇸).
+
+> **OpenMoji names its files in UPPERCASE hex**, Twemoji in lowercase. The same
+> `{codepoint}` therefore resolves for one and 404s for the other: `1f600` serves
+> from Twemoji and `1F600` from OpenMoji. Upper-case the codepoint for the two
+> OpenMoji templates below.
 
 ### OpenMoji color (CC-BY-SA 4.0)
 
