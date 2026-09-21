@@ -34,4 +34,4 @@ this package does not vendor them yet.
 
 ---
 
-[← Docs index](../README.md#pack-specific-docs)
+[← Docs index](../README.md#documentation)

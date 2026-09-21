@@ -35,4 +35,4 @@ CLDR pipeline and the assets arrive through an automated pull request.
 
 ---
 
-[← Docs index](../README.md#pack-specific-docs)
+[← Docs index](../README.md#documentation)
