@@ -81,12 +81,13 @@
       "_why_npm": "NPM publishes new Twemoji releases the same day as GitHub but with no rate-limit ceiling and a simpler API contract."
     },
     "current_version": "15.0.0",
+    "twemoji_github_tag": "v15.1.0",
     "version_check_url": "https://registry.npmjs.org/@twemoji/svg/latest",
     "license": "CC-BY 4.0 (Twemoji assets) + CC-BY-SA 4.0 (OpenMoji assets)",
     "cdn": {
       "twemoji_jsdelivr": "https://cdn.jsdelivr.net/npm/@twemoji/svg@{version}/{codepoint}.svg",
       "twemoji_unpkg": "https://unpkg.com/@twemoji/svg@{version}/{codepoint}.svg",
-      "twemoji_github_raw": "https://raw.githubusercontent.com/jdecked/twemoji/v{version}/assets/svg/{codepoint}.svg",
+      "twemoji_github_raw": "https://raw.githubusercontent.com/jdecked/twemoji/{twemoji_github_tag}/assets/svg/{codepoint}.svg",
       "openmoji_color_jsdelivr": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji@latest/color/svg/{codepoint}.svg",
       "openmoji_black_jsdelivr": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji@latest/black/svg/{codepoint}.svg"
     },
@@ -106,7 +107,7 @@
       "type": "recipe",
       "recipe": "emoji-sets"
     },
-    "_vendored_note": "Versions of the three upstreams that produced the shipped assets. They move independently and conflating them is what left this pack empty: current_version read 17.0.0, which @twemoji/svg has never published, so `npm pack` failed and no assets were ever written (V4). Twemoji 15.0.0 is npm's latest; OpenMoji 15.1.0 is a released tag; Unicode emoji 16.0 is the newest emoji-test.txt that exists and is what the CLDR categorisation used.",
+    "_vendored_note": "Versions of the three upstreams that produced the shipped assets. They move independently and conflating them is what left this pack empty: current_version read 17.0.0, which @twemoji/svg has never published, so `npm pack` failed and no assets were ever written (V4). Twemoji 15.0.0 is npm's latest; OpenMoji 15.1.0 is a released tag; Unicode emoji 16.0 is the newest emoji-test.txt that exists and is what the CLDR categorisation used. The jdecked/twemoji repository tags independently of the npm package: npm's 15.0.0 has no v15.0.0 tag, only v15.1.0. `twemoji_github_raw` therefore carries `{twemoji_github_tag}` rather than `{version}` -- a caller substituting only `{version}` leaves a visible placeholder in the URL instead of building a plausible v15.0.0 that 404s.",
     "cldr_version": "16.0"
   }
 }

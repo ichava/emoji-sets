@@ -6,6 +6,39 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
 
 ### Fixed
 
+- **`config.json` fed one `{version}` into three templates whose upstreams version
+  independently.** `twemoji_github_raw` read `.../jdecked/twemoji/v{version}/...`, so a caller
+  substituting `current_version: 15.0.0` — the documented pattern — built `v15.0.0`, **a tag that
+  repository has never had.** npm publishes `@twemoji/svg` 15.0.0; the repository's 15-line tag
+  is `v15.1.0`. The two numbers are not the same artifact and never were.
+
+  The template now carries **`{twemoji_github_tag}`**, with the value beside `current_version`:
+
+  ```json
+  "current_version":    "15.0.0",
+  "twemoji_github_tag": "v15.1.0",
+  ```
+
+  **The placeholder is deliberately not `{version}`.** A caller who substitutes only `{version}`
+  now gets a URL with `{twemoji_github_tag}` still in it — visibly unfinished — rather than a
+  well-formed `v15.0.0` that 404s and looks like an upstream outage. Failing legibly beats
+  failing plausibly.
+
+  This is the defect `_vendored_note` already warned about, one field lower down: *"They move
+  independently and conflating them is what left this pack empty."* The note said it of
+  `current_version` and the `cdn` block conflated them anyway.
+
+  All five templates were substituted from the config's own fields and fetched: `200` on each.
+
+  > Safe in-tree: `JsonConfigConstants::getUpstreamCdnUrls()` returns the map untouched and
+  > nothing in the estate interpolates it, the maintainer-toolkit reads `version_file` rather
+  > than `cdn`, and no test pins the shape. The exposure is external callers following the
+  > documented `str_replace` example — which is exactly who the visible placeholder is for.
+
+## [Unreleased]
+
+### Fixed
+
 - **The CDN block advertised a Twemoji version that has never been published.** The README
   hardcoded `@twemoji/svg@17.0.0` while `config.json` records `current_version: 15.0.0`. That is
   not drift — `registry.npmjs.org/@twemoji/svg/17.0.0` answers **404**, and so did both CDN URLs
