@@ -118,7 +118,7 @@ All notable changes to `ichava/emoji-sets` follow [Keep a Changelog](https://kee
   OpenMoji `15.1.0`, Unicode CLDR `16.0`. The three are independent and are now labelled as
   such, so the next refresh cannot repeat the conflation.
 
-## [Unreleased]
+## [0.2.6] - 2026-09-21
 
 ### Added
 
