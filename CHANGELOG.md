@@ -2,6 +2,30 @@
 
 All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+
+- **Every usage example in this pack was wrong, and the rebrand caused only one of the four
+  defects.** `README.md` and `IconComponent`'s docblock disagreed with each other, and neither
+  matched what the provider registers.
+
+  | Was | Is | Why |
+  |---|---|---|
+  | `<x-ichava-emoji-sets:icon>` (README) | `<x-icon-sets-emoji-icon>` | wrong prefix **and** wrong shape |
+  | `<x-ichava-emoji-sets::icon>` (docblock) | `<x-icon-sets-emoji-icon>` | the same tag, spelled a third way |
+  | `<x-ichava:icon>` | `<x-ichava::icon>` | core registers `ichava::icon` |
+  | `ichava/icon-sets-emoji:twemoji/…` | `ichava/icon-sets-emoji::twemoji/…` | the path separator is `::` |
+
+  **The tag is derived, not written down.** `Support\ServiceProvider::loadBladeComponent()`
+  registers `Blade::component("{$packageName}-icon", …)` and this pack passes
+  `packageName: 'icon-sets-emoji'`, so the tag is `<x-icon-sets-emoji-icon />` and appears
+  nowhere in the source to grep for. Read off the registration rather than pattern-matched from
+  the old string, and cross-checked against `icon-sets-flag`'s README, which had it right.
+
+  The path separator is `config('ichava.ichava-core.separators.path', '::')`, so the
+  single-colon forms resolved to nothing. Anyone copying those four lines got no icon.
+
 ## [0.3.0] - 2026-09-21
 
 ### Changed
