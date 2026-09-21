@@ -41,4 +41,4 @@ ichava/icon-sets-emoji::twemoji/smileys-emotion/grinning-face
 
 ---
 
-[← Docs index](../README.md#pack-specific-docs)
+[← Docs index](../README.md#documentation)
