@@ -122,6 +122,40 @@ All notable changes to `ichava/emoji-sets` follow [Keep a Changelog](https://kee
 
 ### Fixed
 
+- **`tests/Unit/` was never run.** `phpunit.xml.dist` declared a `Feature`
+  testsuite and nothing else, so any unit test added here would have passed
+  locally when invoked by path and been silently skipped by `composer test` and
+  by CI. Every other pack in the family declares both suites; this one did not.
+
+  It nearly hid itself. The `Feature` suite is 7 tests / 15 assertions, and the
+  unit test added in this change is **also** 7 tests / 15 assertions, so the
+  totals matched exactly whether or not the new file ran.
+
+### Added
+
+- **`resources/lang/` and `resources/views/`, bringing this pack to the canonical
+  resource shape.** It shipped neither.
+
+  This is the only pack in the family with two taxonomies, so it is the only one
+  whose lang file carries both `sets` (3 cases) and `categories` (10 cases),
+  each with descriptions. Set names are proper nouns from their upstream
+  projects and are not translated; their descriptions are.
+
+  `name` and `description` are **deliberately omitted**: `IconRegistry` reads
+  those from `resources/assets/svg/config.json`, which is canonical, and the
+  packs that kept a second copy had already drifted from it unnoticed.
+
+  `views/components/` is an empty placeholder kept for family consistency.
+  Nothing registers it -- the component path renders SVG directly.
+
+  `tests/Unit/ResourceShapeTest.php` pins the shape, holds both enums in step,
+  and asserts every `Set` case has a directory under `files/` -- a lang key
+  naming a set that does not ship is as wrong as one that does not exist.
+
+  > Nothing loads these translations yet. No pack calls `hasTranslations()`.
+
+### Fixed
+
 - **A failed SBOM download no longer takes the whole release down.** `release.yml` generates the
   SBOM before it publishes, and the Syft installer fetches its checksums from GitHub's
   release-asset CDN. On 2026-09-21 that answered `504` for about twenty minutes, failing the job
