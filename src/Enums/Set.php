@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Simtabi\Laranail\Ichava\EmojiSets\Enums;
+namespace Simtabi\Laranail\Ichava\IconSetsEmoji\Enums;
 
 use Simtabi\Laranail\Ichava\Traits\HasIconSetVariants;
 use Simtabi\Laranail\Ichava\Contracts\IconSetVariantInterface;
-use Simtabi\Laranail\Ichava\EmojiSets\Constants\IconsConstants;
+use Simtabi\Laranail\Ichava\IconSetsEmoji\Constants\IconsConstants;
 
 /**
  * The emoji *source* (style/artist).

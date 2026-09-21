@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Simtabi\Laranail\Ichava\EmojiSets\Constants\IconsConstants;
+use Simtabi\Laranail\Ichava\IconSetsEmoji\Constants\IconsConstants;
 
 /**
  * Emoji Sets configuration.

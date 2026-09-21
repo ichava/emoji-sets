@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Simtabi\Laranail\Ichava\EmojiSets\Constants;
+namespace Simtabi\Laranail\Ichava\IconSetsEmoji\Constants;
 
 use Simtabi\Laranail\Ichava\Support\PathResolver;
 use Simtabi\Laranail\Ichava\Constants\JsonConfigConstants;

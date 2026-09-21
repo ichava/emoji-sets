@@ -1,5 +1,5 @@
 {
-    "name": "ichava/emoji-sets",
+    "name": "ichava/icon-sets-emoji",
     "description": "Multi-source emoji bundle for Laravel: Twemoji (Twitter/X), OpenMoji color + black. Unicode 17 / Emoji 17 spec. Categorised by CLDR groups. Built on the Ichava ecosystem.",
     "type": "library",
     "keywords": [
@@ -13,7 +13,7 @@
         "unicode",
         "ichava"
     ],
-    "homepage": "https://opensource.simtabi.com/products/ichava/emoji-sets",
+    "homepage": "https://opensource.simtabi.com/products/ichava/icon-sets-emoji",
     "license": "MIT",
     "authors": [
         {
@@ -55,18 +55,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Simtabi\\Laranail\\Ichava\\EmojiSets\\": "src/"
+            "Simtabi\\Laranail\\Ichava\\IconSetsEmoji\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Simtabi\\Laranail\\Ichava\\EmojiSets\\Tests\\": "tests/"
+            "Simtabi\\Laranail\\Ichava\\IconSetsEmoji\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Simtabi\\Laranail\\Ichava\\EmojiSets\\Providers\\IconsServiceProvider"
+                "Simtabi\\Laranail\\Ichava\\IconSetsEmoji\\Providers\\IconsServiceProvider"
             ]
         },
         "branch-alias": {
@@ -90,9 +90,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "support": {
-        "source": "https://github.com/ichava/emoji-sets",
-        "issues": "https://github.com/ichava/emoji-sets/issues",
-        "security": "https://github.com/ichava/emoji-sets/security/policy",
-        "docs": "https://opensource.simtabi.com/documentation/ichava/emoji-sets/"
+        "source": "https://github.com/ichava/icon-sets-emoji",
+        "issues": "https://github.com/ichava/icon-sets-emoji/issues",
+        "security": "https://github.com/ichava/icon-sets-emoji/security/policy",
+        "docs": "https://opensource.simtabi.com/documentation/ichava/icon-sets-emoji/"
     }
 }

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Simtabi\Laranail\Ichava\EmojiSets\Tests\Unit;
+namespace Simtabi\Laranail\Ichava\IconSetsEmoji\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Simtabi\Laranail\Ichava\EmojiSets\Enums\Set;
-use Simtabi\Laranail\Ichava\EmojiSets\Enums\Category;
+use Simtabi\Laranail\Ichava\IconSetsEmoji\Enums\Set;
+use Simtabi\Laranail\Ichava\IconSetsEmoji\Enums\Category;
 
 /**
  * Pins the canonical `resources/` shape shared by every Ichava icon pack.
@@ -98,7 +98,7 @@ class ResourceShapeTest extends TestCase
             flags: JSON_THROW_ON_ERROR,
         );
 
-        $this->assertSame('ichava/emoji-sets', $config['package']['name']);
+        $this->assertSame('ichava/icon-sets-emoji', $config['package']['name']);
     }
 
     private function resources(): string

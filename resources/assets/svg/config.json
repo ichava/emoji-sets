@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "package": {
-    "name": "ichava/emoji-sets",
+    "name": "ichava/icon-sets-emoji",
     "title": "Emoji Sets",
     "description": "Multi-source emoji bundle (Twemoji, OpenMoji color, OpenMoji black). Unicode 17 / Emoji 17 spec. Categorised by Unicode CLDR groups.",
     "keywords": [
@@ -30,8 +30,8 @@
         "url": "https://openmoji.org/"
       }
     ],
-    "homepage": "https://github.com/ichava/emoji-sets",
-    "repository": "https://github.com/ichava/emoji-sets",
+    "homepage": "https://github.com/ichava/icon-sets-emoji",
+    "repository": "https://github.com/ichava/icon-sets-emoji",
     "data": {
       "variants": {
         "default": {

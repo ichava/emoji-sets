@@ -19,8 +19,8 @@ fills.
 ## Addressing an emoji
 
 ```blade
-<x-ichava:icon name="ichava/emoji-sets:twemoji/grinning-face" class="w-6" />
-<x-ichava:icon name="ichava/emoji-sets:openmoji-black/rocket" class="w-6 text-indigo-600" />
+<x-ichava:icon name="ichava/icon-sets-emoji:twemoji/grinning-face" class="w-6" />
+<x-ichava:icon name="ichava/icon-sets-emoji:openmoji-black/rocket" class="w-6 text-indigo-600" />
 ```
 
 ## Assets are not vendored yet

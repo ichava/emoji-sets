@@ -1,10 +1,10 @@
-# ichava/emoji-sets
+# ichava/icon-sets-emoji
 
 Multi-source emoji bundle for Laravel. Twemoji v17 (Twitter/X) + OpenMoji
 color + OpenMoji black, all in one Composer package, categorised by
 Unicode CLDR groups, served through the Ichava icon engine.
 
-[![Tests](https://github.com/ichava/emoji-sets/actions/workflows/tests.yml/badge.svg)](https://github.com/ichava/emoji-sets/actions/workflows/tests.yml)
+[![Tests](https://github.com/ichava/icon-sets-emoji/actions/workflows/tests.yml/badge.svg)](https://github.com/ichava/icon-sets-emoji/actions/workflows/tests.yml)
 
 > **Status: Phase A0 alpha (v0.1.0).** The Composer package, service
 > provider, enums, indexes, and CDN configuration are wired and tested.
@@ -12,7 +12,7 @@ Unicode CLDR groups, served through the Ichava icon engine.
 > toolkit ([`ichava/maintainer-toolkit`](https://github.com/ichava/maintainer-toolkit))
 > runs the Twemoji + OpenMoji + CLDR ETL in CI -- the assets land
 > through an automated PR. Until Phase A1 (the first asset drop) ships,
-> `composer require ichava/emoji-sets` gives you the engine
+> `composer require ichava/icon-sets-emoji` gives you the engine
 > wiring and the CDN config, **not the vendored SVGs**. Use the CDN
 > URLs (below) in the meantime.
 
@@ -32,7 +32,7 @@ migration table.
 ## Install
 
 ```bash
-composer require ichava/emoji-sets
+composer require ichava/icon-sets-emoji
 ```
 
 That's it -- service-provider auto-discovery wires the pack into the
@@ -48,10 +48,10 @@ Ichava engine.
 <x-ichava-emoji-sets:icon name="smileys-emotion/grinning-face" />
 
 {{-- Through the generic Ichava engine --}}
-<x-ichava:icon name="ichava/emoji-sets:twemoji/flags/flag-japan" />
+<x-ichava:icon name="ichava/icon-sets-emoji:twemoji/flags/flag-japan" />
 
 {{-- Helper function --}}
-{{ ichava('ichava/emoji-sets:openmoji-black/objects/light-bulb', ['class' => 'w-6 h-6']) }}
+{{ ichava('ichava/icon-sets-emoji:openmoji-black/objects/light-bulb', ['class' => 'w-6 h-6']) }}
 ```
 
 ## Configuration
@@ -150,7 +150,7 @@ URL on the fly.
 This pack participates in Ichava's upstream-tracking system. Run
 
 ```bash
-php artisan ichava::ichava-core.check-updates --package=ichava/emoji-sets
+php artisan ichava::ichava-core.check-updates --package=ichava/icon-sets-emoji
 ```
 
 to see whether a newer Twemoji or OpenMoji release exists. The check
