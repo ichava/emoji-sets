@@ -4,6 +4,17 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
 
 ## [Unreleased]
 
+### Changed
+
+- **`ichava/core` `^0.4` is accepted.** The constraint read `^0.2.8 || ^0.3`, and a caret on a
+  `0.x` version pins the *minor*, so `0.4.0` did not satisfy it at all. An application that wanted
+  core `0.4` could not install this pack beside it, and Composer reported that as a conflict on
+  `ichava/core` rather than on the pack that was holding it back.
+
+  The branch is **added, not substituted**. `^0.2.8` and `^0.3` keep resolving, because nothing
+  here calls an API that `0.4` introduced, so raising the floor would strand 0.2 and 0.3 consumers
+  for no gain.
+
 ### Fixed
 
 - **`ATTRIBUTION.md` named the wrong version of the assets it attributes.** It read
