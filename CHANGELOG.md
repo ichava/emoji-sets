@@ -6,6 +6,20 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
 
 ### Fixed
 
+- **The README's link label named the old central docs repo.** The URL was already correct and
+  points at the hosted `maintainer-toolkit` page, while the text beside it still read
+  `ichava/documentation/icon-pack-upstream-tracking.md`. The label now names the page the link
+  opens.
+
+  **No link checker sees this class.** The label is a code span, not a target, so the link
+  resolves and the text next to it is wrong — `lychee` and every `](...)` sweep pass it. Found
+  by grepping for `` `…documentation/….md` `` rather than for links, after the estate-wide link
+  scan came back at zero.
+
+## [Unreleased]
+
+### Fixed
+
 - **Every usage example in this pack was wrong, and the rebrand caused only one of the four
   defects.** `README.md` and `IconComponent`'s docblock disagreed with each other, and neither
   matched what the provider registers.
