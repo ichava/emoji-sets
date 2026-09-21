@@ -1,189 +1,45 @@
 # ichava/icon-sets-emoji
 
-Multi-source emoji bundle for Laravel. Twemoji v17 (Twitter/X) + OpenMoji
-color + OpenMoji black, all in one Composer package, categorised by
-Unicode CLDR groups, served through the Ichava icon engine.
-
 [![Tests](https://github.com/ichava/icon-sets-emoji/actions/workflows/tests.yml/badge.svg)](https://github.com/ichava/icon-sets-emoji/actions/workflows/tests.yml)
+[![Code Quality](https://github.com/ichava/icon-sets-emoji/actions/workflows/code-quality.yml/badge.svg)](https://github.com/ichava/icon-sets-emoji/actions/workflows/code-quality.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-> **Status: Phase A0 alpha (v0.1.0).** The Composer package, service
-> provider, enums, indexes, and CDN configuration are wired and tested.
-> **The bundled SVG assets are not yet committed.** The maintainer
-> toolkit ([`ichava/maintainer-toolkit`](https://github.com/ichava/maintainer-toolkit))
-> runs the Twemoji + OpenMoji + CLDR ETL in CI -- the assets land
-> through an automated PR. Until Phase A1 (the first asset drop) ships,
-> `composer require ichava/icon-sets-emoji` gives you the engine
-> wiring and the CDN config, **not the vendored SVGs**. Use the CDN
-> URLs (below) in the meantime.
+> Emoji for the Ichava Laravel icon ecosystem — 10,567 SVGs across Twemoji, OpenMoji colour and OpenMoji black.
 
-## Why
-
-The Ichava ecosystem ships per-vendor icon packs (`tabler-icons`,
-`metronic-icons`, `bundled-icons`). This pack does the same for emojis --
-one install gets you ~12,000 SVGs covering Unicode 17, organised by both
-*source style* (Twemoji / OpenMoji) and *Unicode group* (smileys-emotion,
-people-body, animals-nature, ...).
-
-This package replaces the older `laranail/flagmoji` (a.k.a. `simtabi/laflamoji`),
-which mixed flags and emojis, used codepoint filenames, and required
-`blade-ui-kit/blade-icons`. See the `flagmoji` repo's `DEPRECATED.md` for the
-migration table.
+This package is not published to Packagist, so there is no registry-version badge to show. Requires [`ichava/core`](https://opensource.simtabi.com/documentation/ichava/core/); targets PHP `^8.4.1 || ^8.5` on Laravel `^13`.
 
 ## Install
 
 ```bash
 composer require ichava/icon-sets-emoji
+php artisan ichava::ichava-core.database seed --package=ichava/icon-sets-emoji
 ```
 
-That's it -- service-provider auto-discovery wires the pack into the
-Ichava engine.
-
-## Usage
-
-```blade
-{{-- Full form: pick a set, then Unicode CLDR group, then emoji slug --}}
-<x-icon-sets-emoji-icon name="twemoji/smileys-emotion/grinning-face" />
-
-{{-- Default set ("twemoji"); short form skips the set segment --}}
-<x-icon-sets-emoji-icon name="smileys-emotion/grinning-face" />
-
-{{-- Through the generic Ichava engine --}}
-<x-ichava::icon name="ichava/icon-sets-emoji::twemoji/flags/flag-japan" />
-
-{{-- Helper function --}}
-{{ ichava('ichava/icon-sets-emoji::openmoji-black/objects/light-bulb', ['class' => 'w-6 h-6']) }}
-```
-
-## Configuration
-
-```php
-// config/emoji-sets.php (publishable)
-return [
-    'set' => [
-        'name'   => 'emoji-sets',
-        'prefix' => 'emoji',
-    ],
-
-    // Which set the short form resolves to when no set is specified.
-    'default_set' => env('ICHAVA_EMOJI_DEFAULT_SET', 'twemoji'),
-];
-```
-
-## Sets
-
-All three ship today. Versions are the upstream releases that produced the vendored assets, and
-they move independently -- `resources/assets/svg/config.json` is the source of truth for each.
-
-| Set | Style | Source | Assets licence |
-|---|---|---|---|
-| `twemoji` (default) | Detailed colourful (Twitter/X look) | [jdecked/twemoji v15.1.0](https://github.com/jdecked/twemoji) | CC-BY 4.0 |
-| `openmoji-color` | Flat colourful, outlined | [hfg-gmuend/openmoji 15.1.0](https://github.com/hfg-gmuend/openmoji) | CC-BY-SA 4.0 |
-| `openmoji-black` | Monochrome outline | Same as above | CC-BY-SA 4.0 |
-
-See [`ATTRIBUTION.md`](ATTRIBUTION.md) for full attribution requirements.
-
-## Categories
-
-The 10 Unicode CLDR groups, in canonical order:
-
-1. `smileys-emotion`
-2. `people-body`
-3. `component` -- skin tones, hair styles
-4. `animals-nature`
-5. `food-drink`
-6. `travel-places`
-7. `activities`
-8. `objects`
-9. `symbols`
-10. `flags` -- country / regional indicator emojis
-
-Each group lives at `resources/assets/svg/files/<set>/<group>/`. Filenames
-are CLDR canonical short-name slugs (e.g. `grinning-face.svg`,
-`flag-united-states.svg`). The repo also ships `codepoints.json` and
-`names.json` indexes for codepoint-based lookups.
-
-## Building the assets
-
-Assets are committed to the repo, so a `composer require` install is
-all-you-need. Refreshing them from upstream (new Twemoji release, new
-OpenMoji drop, new Unicode CLDR cycle) is a **maintainer-side** step
-that runs in CI via [`ichava/maintainer-toolkit`](https://github.com/ichava/maintainer-toolkit) -- the
-Docker-based toolkit that owns every pack's asset pipeline. Cron opens
-a PR with the refreshed SVGs; a human reviews + tags a new release.
-
-## CDN endpoints (skip vendoring entirely)
-
-If you'd rather not ship 22MB of SVGs inside your composer install,
-serve them from a CDN. The pack registers its CDN URL templates in
-`config.json` so other tooling can read them too; the canonical
-templates are:
-
-### Twemoji (recommended; CC-BY 4.0)
-
-```
-https://cdn.jsdelivr.net/npm/@twemoji/svg@15.0.0/{codepoint}.svg
-https://unpkg.com/@twemoji/svg@15.0.0/{codepoint}.svg
-https://raw.githubusercontent.com/jdecked/twemoji/v15.1.0/assets/svg/{codepoint}.svg
-```
-
-`{codepoint}` is the dash-joined hex codepoint (e.g. `1f600` for 😀,
-`1f1fa-1f1f8` for 🇺🇸).
-
-> **OpenMoji names its files in UPPERCASE hex**, Twemoji in lowercase. The same
-> `{codepoint}` therefore resolves for one and 404s for the other: `1f600` serves
-> from Twemoji and `1F600` from OpenMoji. Upper-case the codepoint for the two
-> OpenMoji templates below.
-
-### OpenMoji color (CC-BY-SA 4.0)
-
-```
-https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji@latest/color/svg/{codepoint}.svg
-```
-
-### OpenMoji black (CC-BY-SA 4.0)
-
-```
-https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji@latest/black/svg/{codepoint}.svg
-```
-
-### Codepoint lookup
-
-The pack ships `resources/assets/svg/codepoints.json` mapping every
-canonical slug to its codepoint, so you can resolve
-`smileys-emotion/grinning-face` -> `1f600` at runtime and build a CDN
-URL on the fly.
-
-## Upstream tracking
-
-This pack participates in Ichava's upstream-tracking system. Run
-
-```bash
-php artisan ichava::ichava-core.check-updates --package=ichava/icon-sets-emoji
-```
-
-to see whether a newer Twemoji or OpenMoji release exists. The check
-hits `registry.npmjs.org` (and supplementary GitHub releases for
-OpenMoji), caches results for 12 hours, and dispatches
-`IconPackUpdateAvailable` events the host app can route to Slack /
-email / dashboards.
-
-See [`maintainer-toolkit/docs/upstream-tracking.md`](https://opensource.simtabi.com/documentation/ichava/maintainer-toolkit/upstream-tracking)
-for the full schema + how to subscribe to update events.
+The seed is not optional — until it runs the registry holds no rows for this pack and every lookup returns nothing. See core's [installation guide](https://opensource.simtabi.com/documentation/ichava/core/installation).
 
 ## <a name="documentation"></a>Documentation
 
-Vendor-specific deep dives live in this repo under [`docs/`](docs/). Anything that applies to *every* Ichava icon pack lives in the [main documentation repo](https://github.com/ichava/documentation/blob/main/README.md#icon-packs).
+Full documentation is at **[opensource.simtabi.com/documentation/ichava/icon-sets-emoji](https://opensource.simtabi.com/documentation/ichava/icon-sets-emoji/)**.
 
-- [Sets](docs/sets.md), Twemoji and the two OpenMoji styles
-- [Categories](docs/categories.md), the ten Unicode CLDR groups
-- [Attribution](docs/attribution.md), per-set licences. CC-BY and CC-BY-SA are not the same
+### This pack
 
-## Status
+- [Sets](docs/sets.md) — the three sets, their counts, and how to pick one
+- [Categories](docs/categories.md) — the category tree and how to address a codepoint
+- [Attribution](docs/attribution.md) — per-set licence terms, which differ, and where versions are recorded
 
-**Alpha (v0.1.0).** Phase A0 skeleton committed. Phase A1 (full asset
-build) lands next.
+### Shared across every pack
 
-## Licence
+- [Use an icon pack](https://opensource.simtabi.com/documentation/ichava/core/recipes/use-an-icon-pack) — addressing icons, in Blade and in PHP
+- [Seed pack icons](https://opensource.simtabi.com/documentation/ichava/core/recipes/seed-pack-icons) — the seeding pipeline and its options
+- [Check pack updates](https://opensource.simtabi.com/documentation/ichava/core/recipes/check-pack-updates) — the update checker and what its statuses mean
+- [Serve icons from a CDN](https://opensource.simtabi.com/documentation/ichava/core/recipes/serve-icons-from-a-cdn) — reading this pack's CDN templates out of `config.json`
 
-MIT code; CC-BY 4.0 + CC-BY-SA 4.0 for the shipped SVG assets. See
-[`LICENSE`](LICENSE) and [`ATTRIBUTION.md`](ATTRIBUTION.md).
+Its upstream is `Twemoji and OpenMoji`; run core's [check pack updates](https://opensource.simtabi.com/documentation/ichava/core/recipes/check-pack-updates) recipe to see whether a newer release exists.
+
+## Contributing & security
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Report vulnerabilities privately through [SECURITY.md](SECURITY.md) — never in a public issue.
+
+## License
+
+MIT. © Simtabi LLC. See [LICENSE](LICENSE).
