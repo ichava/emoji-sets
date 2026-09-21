@@ -4,6 +4,16 @@
 
 *Reference.*
 
+
+`ichava/icon-sets-emoji` ships **10,567 SVGs across three sets**, relocated here from the README:
+
+| Set | SVGs |
+|---|---:|
+| `twemoji` (default) | 3,435 |
+| `openmoji-color` | 3,566 |
+| `openmoji-black` | 3,566 |
+
+Counts measured with `find resources/assets/svg/files/<set> -name '*.svg' | wc -l`. The vendored version of each upstream is recorded in `resources/assets/svg/config.json`, not here -- a version written in two places drifts.
 Three emoji styles, addressed as separate variants under one package. The `Set` enum in
 `src/Enums/Set.php` is the source of truth.
 
