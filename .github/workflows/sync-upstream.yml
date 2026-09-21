@@ -29,6 +29,11 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  # The sync opens its PR with GITHUB_TOKEN, and GitHub deliberately does not
+  # start workflow runs for events created with that token -- so the PR arrives
+  # with zero checks and reads as `unstable` rather than as failing. We cannot
+  # trigger the normal suite from here; we can attach a real commit status.
+  statuses: write
 
 concurrency:
   group: sync-upstream-${{ github.repository }}
@@ -99,6 +104,52 @@ jobs:
             -e GIT_CONFIG_VALUE_1="$AUTH_HEADER" \
             ichava-maintainer-toolkit:local \
             sync --pack="$PACK_SLUG" "${FLAGS[@]}"
+
+      # Without this the sync PR has no checks at all: see the note on
+      # `statuses: write` above. Run the suite against whatever the sync just
+      # pushed and attach the verdict to that commit, so the PR shows a real
+      # pass/fail instead of silence.
+      - name: Verify the synced branch and report a commit status
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          # `gh pr list` has no prefix filter -- only exact --head -- so list
+          # the open PRs and select by prefix here.
+          PR_JSON=$(gh pr list --repo "$GITHUB_REPOSITORY" --state open \
+            --json number,headRefName,headRefOid --limit 50 \
+            --jq '[.[] | select(.headRefName | startswith("chore/sync-upstream"))]' \
+            2>/dev/null || echo '[]')
+          if [ "$(printf '%s' "$PR_JSON" | jq 'length')" -eq 0 ]; then
+            echo "No sync PR open -- nothing to verify."
+            exit 0
+          fi
+
+          REF=$(printf '%s' "$PR_JSON" | jq -r '.[0].headRefName')
+          SHA=$(printf '%s' "$PR_JSON" | jq -r '.[0].headRefOid')
+          echo "Verifying $REF at $SHA"
+
+          post_status() {
+            gh api -X POST "repos/$GITHUB_REPOSITORY/statuses/$SHA" \
+              -f state="$1" -f context='Sync verification' -f description="$2" \
+              -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >/dev/null
+          }
+
+          post_status pending 'Running the suite against the synced content'
+
+          git fetch origin "$REF"
+          git checkout -q "$SHA"
+
+          if composer update --prefer-stable --prefer-dist --no-interaction --no-progress \
+             && vendor/bin/pest; then
+            post_status success 'Suite passed on the synced content'
+          else
+            post_status failure 'Suite failed on the synced content'
+            echo "::error::The synced content does not pass this package's suite. Do not merge $REF."
+            exit 1
+          fi
 
       - name: Clean up
         if: always()
