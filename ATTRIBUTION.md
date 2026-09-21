@@ -9,7 +9,8 @@ below with its source, licence, and any attribution requirements.
 
 - **Set directory**: `resources/assets/svg/files/twemoji/`
 - **Source**: <https://github.com/jdecked/twemoji>
-- **Upstream version**: 17.0.0 (Unicode 17 / Emoji 17 spec)
+- **Upstream version**: npm `@twemoji/svg` 15.0.0, repository tag `v15.1.0`
+  (the two version independently; `resources/assets/svg/config.json` holds both)
 - **Licence (code)**: MIT
 - **Licence (assets)**: CC-BY 4.0
 - **Attribution requirement**: when redistributing the SVGs, credit
@@ -21,6 +22,7 @@ below with its source, licence, and any attribution requirements.
   - `resources/assets/svg/files/openmoji-color/`
   - `resources/assets/svg/files/openmoji-black/`
 - **Source**: <https://github.com/hfg-gmuend/openmoji>
+- **Upstream version**: 15.1.0
 - **Licence (code)**: LGPL-3.0
 - **Licence (assets)**: CC-BY-SA 4.0
 - **Attribution requirement**: credit "OpenMoji -- the open-source emoji

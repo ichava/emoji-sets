@@ -6,6 +6,34 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
 
 ### Fixed
 
+- **`ATTRIBUTION.md` named the wrong version of the assets it attributes.** It read
+  *"Upstream version: 17.0.0 (Unicode 17 / Emoji 17 spec)"* under Twemoji. The shipped assets are
+  npm `@twemoji/svg` 15.0.0, repository tag `v15.1.0`, and the categorisation used CLDR 16.0 —
+  so both halves were wrong. **This is the document a redistributor relies on**, which makes a
+  wrong version here different in kind from a wrong version in a README.
+
+  OpenMoji had no version line at all; it now carries `15.1.0`, from `additional_sources`. One
+  section versioned and one not is the asymmetry that let the other number go unread.
+
+- **`package.upstream_version` still said `twemoji@17.0.0 + openmoji@latest`.** A *second*
+  version field, in the same file as the one corrected earlier and in a different block — so the
+  earlier fix to `upstream.current_version` left the file self-contradictory.
+
+  It is now `15.0.0`, matching. The composite form could not survive anyway:
+  `maintainer-toolkit`'s `version_keys` defaults to
+  `["upstream.current_version", "package.upstream_version"]`, documented as *"All are read
+  (first hit wins) and all are written"* — so the next sync writes a bare version string over it.
+  A field the tooling treats as holding one version cannot hold two.
+
+  > **Found by sweeping the package after declaring it clean.** The Sets-table fix merged, a
+  > grep for `17.0.0` was run, and the conclusion *"only CHANGELOG keeps the number"* was written
+  > in the same breath as output listing two live sites. The grep was right; the sentence was
+  > not.
+
+## [Unreleased]
+
+### Fixed
+
 - **The `## Sets` table named a Twemoji release that did not produce the shipped assets, and its
   heading said the whole table was unshipped.** The second is what let the first survive: a
   reader who believes a table describes a future state does not check the version in it.
