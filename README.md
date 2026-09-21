@@ -159,7 +159,7 @@ OpenMoji), caches results for 12 hours, and dispatches
 `IconPackUpdateAvailable` events the host app can route to Slack /
 email / dashboards.
 
-See [`ichava/documentation/icon-pack-upstream-tracking.md`](https://opensource.simtabi.com/documentation/ichava/maintainer-toolkit/upstream-tracking)
+See [`maintainer-toolkit/docs/upstream-tracking.md`](https://opensource.simtabi.com/documentation/ichava/maintainer-toolkit/upstream-tracking)
 for the full schema + how to subscribe to update events.
 
 ## <a name="documentation"></a>Documentation
