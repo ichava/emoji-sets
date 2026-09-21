@@ -6,6 +6,32 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
 
 ### Fixed
 
+- **The CDN block advertised a Twemoji version that has never been published.** The README
+  hardcoded `@twemoji/svg@17.0.0` while `config.json` records `current_version: 15.0.0`. That is
+  not drift — `registry.npmjs.org/@twemoji/svg/17.0.0` answers **404**, and so did both CDN URLs
+  built from it. It is the same number `V4` caught in `config.json`, reintroduced in prose.
+
+- **The GitHub raw URL needed `v15.1.0`, not `v15.0.0`.** The three Twemoji templates do not
+  share a version space: npm `@twemoji/svg` publishes `15.0.0`, and the `jdecked/twemoji`
+  repository has no `v15.0.0` tag at all — its 15-line tag is `v15.1.0`. A blanket
+  `17.0.0` → `15.0.0` would have fixed two URLs and **broken a third that worked**.
+
+  > That mismatch is also live in `config.json`, which feeds one `{version}` into all three
+  > templates. `twemoji_github_raw` interpolated with `15.0.0` yields a tag that does not exist.
+  > Left alone here — it is config, not prose, and the update checker reads it.
+
+- **`{codepoint}` is lower-case for Twemoji and UPPER-case for OpenMoji.** The README documented
+  one convention (`1f600`) for five URLs across two upstreams with different filename casing, so
+  following it served a Twemoji glyph and 404'd on both OpenMoji templates. A caveat now says so
+  where the OpenMoji block starts.
+
+  All five URLs were checked end to end against a real codepoint rather than reasoned about:
+  `200` on each, with the casing each block states.
+
+## [Unreleased]
+
+### Fixed
+
 - **The README's link label named the old central docs repo.** The URL was already correct and
   points at the hosted `maintainer-toolkit` page, while the text beside it still read
   `ichava/documentation/icon-pack-upstream-tracking.md`. The label now names the page the link
