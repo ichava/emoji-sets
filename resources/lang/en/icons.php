@@ -17,8 +17,8 @@ declare(strict_types=1);
 | This pack is the only one in the family with two taxonomies, so it is the
 | only one with both `sets` and `categories`:
 |
-|   sets       -> Simtabi\Laranail\Ichava\EmojiSets\Enums\Set
-|   categories -> Simtabi\Laranail\Ichava\EmojiSets\Enums\Category
+|   sets       -> Simtabi\Laranail\Ichava\IconSetsEmoji\Enums\Set
+|   categories -> Simtabi\Laranail\Ichava\IconSetsEmoji\Enums\Category
 |
 | Set names are proper nouns from their upstream projects and are NOT
 | translated -- only their descriptions are.

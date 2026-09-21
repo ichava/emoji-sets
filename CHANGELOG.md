@@ -14,8 +14,8 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
 
   | Surface | Was | Now |
   |---|---|---|
-  | Composer package | `ichava/emoji-sets` | `ichava/icon-sets-emoji` |
-  | PHP namespace | `Simtabi\Laranail\Ichava\EmojiSets` | `Simtabi\Laranail\Ichava\IconSetsEmoji` |
+  | Composer package | `ichava/icon-sets-emoji` | `ichava/icon-sets-emoji` |
+  | PHP namespace | `Simtabi\Laranail\Ichava\IconSetsEmoji` | `Simtabi\Laranail\Ichava\IconSetsEmoji` |
   | Config file and key | `config/emoji-sets.php` | `config/icon-sets-emoji.php` |
 
   The config **filename** must match the package short name or the key silently doubles and
