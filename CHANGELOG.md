@@ -30,10 +30,6 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
   > in the same breath as output listing two live sites. The grep was right; the sentence was
   > not.
 
-## [Unreleased]
-
-### Fixed
-
 - **The `## Sets` table named a Twemoji release that did not produce the shipped assets, and its
   heading said the whole table was unshipped.** The second is what let the first survive: a
   reader who believes a table describes a future state does not check the version in it.
@@ -54,10 +50,6 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
   `openmoji` now carries its version too. One row versioned and two not is the asymmetry that let
   a stale number sit unexamined; the table is self-checking against `config.json` now, and says
   so.
-
-## [Unreleased]
-
-### Fixed
 
 - **`config.json` fed one `{version}` into three templates whose upstreams version
   independently.** `twemoji_github_raw` read `.../jdecked/twemoji/v{version}/...`, so a caller
@@ -88,10 +80,6 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
   > than `cdn`, and no test pins the shape. The exposure is external callers following the
   > documented `str_replace` example — which is exactly who the visible placeholder is for.
 
-## [Unreleased]
-
-### Fixed
-
 - **The CDN block advertised a Twemoji version that has never been published.** The README
   hardcoded `@twemoji/svg@17.0.0` while `config.json` records `current_version: 15.0.0`. That is
   not drift — `registry.npmjs.org/@twemoji/svg/17.0.0` answers **404**, and so did both CDN URLs
@@ -114,10 +102,6 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
   All five URLs were checked end to end against a real codepoint rather than reasoned about:
   `200` on each, with the casing each block states.
 
-## [Unreleased]
-
-### Fixed
-
 - **The README's link label named the old central docs repo.** The URL was already correct and
   points at the hosted `maintainer-toolkit` page, while the text beside it still read
   `ichava/documentation/icon-pack-upstream-tracking.md`. The label now names the page the link
@@ -127,10 +111,6 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
   resolves and the text next to it is wrong — `lychee` and every `](...)` sweep pass it. Found
   by grepping for `` `…documentation/….md` `` rather than for links, after the estate-wide link
   scan came back at zero.
-
-## [Unreleased]
-
-### Fixed
 
 - **Every usage example in this pack was wrong, and the rebrand caused only one of the four
   defects.** `README.md` and `IconComponent`'s docblock disagreed with each other, and neither
