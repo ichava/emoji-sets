@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Ichava\IconSetsEmoji\Tests\Feature;
 
-use Simtabi\Laranail\Ichava\IconSetsEmoji\Enums\Set;
 use Simtabi\Laranail\Ichava\Services\IconRegistry;
+use Simtabi\Laranail\Ichava\IconSetsEmoji\Enums\Set;
 use Simtabi\Laranail\Ichava\IconSetsEmoji\Enums\Category;
 use Simtabi\Laranail\Ichava\IconSetsEmoji\Tests\TestCase;
 use Simtabi\Laranail\Ichava\IconSetsEmoji\Constants\IconsConstants;
