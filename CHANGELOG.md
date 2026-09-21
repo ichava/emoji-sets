@@ -27,10 +27,6 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
   a stale number sit unexamined; the table is self-checking against `config.json` now, and says
   so.
 
-## [Unreleased]
-
-### Fixed
-
 - **`config.json` fed one `{version}` into three templates whose upstreams version
   independently.** `twemoji_github_raw` read `.../jdecked/twemoji/v{version}/...`, so a caller
   substituting `current_version: 15.0.0` — the documented pattern — built `v15.0.0`, **a tag that
@@ -60,10 +56,6 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
   > than `cdn`, and no test pins the shape. The exposure is external callers following the
   > documented `str_replace` example — which is exactly who the visible placeholder is for.
 
-## [Unreleased]
-
-### Fixed
-
 - **The CDN block advertised a Twemoji version that has never been published.** The README
   hardcoded `@twemoji/svg@17.0.0` while `config.json` records `current_version: 15.0.0`. That is
   not drift — `registry.npmjs.org/@twemoji/svg/17.0.0` answers **404**, and so did both CDN URLs
@@ -86,10 +78,6 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
   All five URLs were checked end to end against a real codepoint rather than reasoned about:
   `200` on each, with the casing each block states.
 
-## [Unreleased]
-
-### Fixed
-
 - **The README's link label named the old central docs repo.** The URL was already correct and
   points at the hosted `maintainer-toolkit` page, while the text beside it still read
   `ichava/documentation/icon-pack-upstream-tracking.md`. The label now names the page the link
@@ -99,10 +87,6 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
   resolves and the text next to it is wrong — `lychee` and every `](...)` sweep pass it. Found
   by grepping for `` `…documentation/….md` `` rather than for links, after the estate-wide link
   scan came back at zero.
-
-## [Unreleased]
-
-### Fixed
 
 - **Every usage example in this pack was wrong, and the rebrand caused only one of the four
   defects.** `README.md` and `IconComponent`'s docblock disagreed with each other, and neither
