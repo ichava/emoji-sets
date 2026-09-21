@@ -6,6 +6,31 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
 
 ### Fixed
 
+- **The `## Sets` table named a Twemoji release that did not produce the shipped assets, and its
+  heading said the whole table was unshipped.** The second is what let the first survive: a
+  reader who believes a table describes a future state does not check the version in it.
+
+  `## Sets (once Phase A1 lands)` — all three sets ship today, on `main`, and have for a while:
+
+  ```
+  resources/assets/svg/files/twemoji         3,435
+  resources/assets/svg/files/openmoji-color  3,566
+  resources/assets/svg/files/openmoji-black  3,566
+  ```
+
+  The version was `jdecked/twemoji v17.0.0`. That tag is real and the link worked — it simply is
+  not what the vendored assets came from. `config.json` records npm `15.0.0`, whose repository
+  tag is `v15.1.0`. **A working link under a label naming the wrong thing**, the same class as
+  the README cross-references fixed earlier and invisible to a link checker for the same reason.
+
+  `openmoji` now carries its version too. One row versioned and two not is the asymmetry that let
+  a stale number sit unexamined; the table is self-checking against `config.json` now, and says
+  so.
+
+## [Unreleased]
+
+### Fixed
+
 - **`config.json` fed one `{version}` into three templates whose upstreams version
   independently.** `twemoji_github_raw` read `.../jdecked/twemoji/v{version}/...`, so a caller
   substituting `current_version: 15.0.0` — the documented pattern — built `v15.0.0`, **a tag that
