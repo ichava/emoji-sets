@@ -17,6 +17,18 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
 
 ### Fixed
 
+- **`branch-alias` names the series `main` is on, not the one before it.**
+  `dev-main` was aliased to `0.2.x-dev` while this package has been on the 0.3
+  series since `v0.3.0`. The alias is what a path or VCS consumer sees when it
+  tracks `dev-main`, so `0.2.x-dev` fails a `^0.3` constraint outright and
+  Composer reports it as a conflict on this package rather than as a stale
+  alias.
+
+  Measured: `0.2.9999999.9999999-dev` does not satisfy `^0.3` or
+  `^0.3 || ^0.4`; `0.3.9999999.9999999-dev` satisfies both. `demos/ichava-app`
+  does not catch this because it requires every package at `*@dev`, which
+  matches either alias -- the integration check is structurally blind to it.
+
 - **`ATTRIBUTION.md` named the wrong version of the assets it attributes.** It read
   *"Upstream version: 17.0.0 (Unicode 17 / Emoji 17 spec)"* under Twemoji. The shipped assets are
   npm `@twemoji/svg` 15.0.0, repository tag `v15.1.0`, and the categorisation used CLDR 16.0 —
