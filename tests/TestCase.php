@@ -29,7 +29,7 @@ abstract class TestCase extends Orchestra
      *
      * This pack's own tests do not reach the database -- they assert that the provider
      * boots, that the constants resolve from `config.json`, and that the enum helpers use
-     * the configured prefix. The harness still matches `ichava/core` and `ichava/browser`
+     * the configured prefix. The harness still matches `ichava/core` and `ichava/icon-browser`
      * so that `DB_CONNECTION=pgsql vendor/bin/pest` means the same thing in every PHP
      * package here, and a pack test that does reach the database needs no new plumbing.
      */
