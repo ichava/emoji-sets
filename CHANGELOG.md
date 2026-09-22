@@ -6,6 +6,22 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
 
 ### Changed
 
+- **CI states the `orchestra/testbench` constraint instead of inheriting it.**
+  The matrix gains a `testbench: ^11.0` include and the `composer require` line
+  pins it, matching the other four packs.
+
+  **This changes nothing about what gets installed, and an earlier report of
+  mine said otherwise.** The claim was that this pack "silently tests against
+  whatever resolves, so a testbench major would land here and nowhere else".
+  That is wrong: `composer.json` already requires `orchestra/testbench: ^11.0`
+  in `require-dev`, so a version outside `^11` was never reachable. Measured
+  both ways in a clean checkout -- **`v11.2.0` with the pin and `v11.2.0`
+  without it.**
+
+  The change is structural, not behavioural: the matrix can now vary testbench
+  alongside Laravel the way the other packs' can, and the workflow states its
+  own constraint rather than depending on the manifest to supply it.
+
 - **`phpunit.xml.dist` fails on an empty suite and on output during tests.**
   `failOnEmptyTestSuite` and `beStrictAboutOutputDuringTests` were missing; the
   file now matches `icon-sets-flag`'s exactly.
