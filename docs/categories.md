@@ -1,3 +1,5 @@
+[← Docs index](../README.md#documentation)
+
 # Categories
 
 *Reference.*
