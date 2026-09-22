@@ -69,7 +69,7 @@ it(description: 'indexes every docs page from the README, and lists none that is
 
 it(description: 'opens every page at its title and closes it with one index link', closure: function () {
     $footer = '[← Docs index](../README.md#documentation)';
-    $pages  = glob(docs_root() . '/*.md') ?: [];
+    $pages = glob(docs_root() . '/*.md') ?: [];
 
     // A glob that matches nothing makes every assertion below vacuous, and the
     // test then passes over a docs directory it never read.
