@@ -23,6 +23,11 @@ Full documentation is at **[opensource.simtabi.com/documentation/ichava/icon-set
 
 ### This pack
 
+- [Installation](docs/installation.md) — requirements, the repositories block, seeding
+- [Getting started](docs/getting-started.md) — your first icon from this pack
+- [Configuration](docs/configuration.md) — this pack's config key, and what is core's instead
+- [Architecture](docs/architecture.md) — what it ships, what it delegates, and why
+- [Release](docs/release.md) — how a version is cut, and when the core floor moves
 - [Sets](docs/sets.md) — the three sets, their counts, and how to pick one
 - [Categories](docs/categories.md) — the category tree and how to address a codepoint
 - [Attribution](docs/attribution.md) — per-set licence terms, which differ, and where versions are recorded
