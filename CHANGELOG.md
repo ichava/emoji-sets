@@ -2,7 +2,7 @@
 
 All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.3.3] - 2026-09-22
 
 ### Changed
 
