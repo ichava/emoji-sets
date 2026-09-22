@@ -6,6 +6,37 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
 
 ### Changed
 
+- **The "Authenticate Composer for private GitHub deps" step is gone.** It
+  configured a `GH_PACKAGES_PAT` against `github-oauth.github.com` because
+  `ichava/core` and `laranail/package-tools` were private. **Both are public
+  now**, and so is every other dependency this pack resolves, so the step
+  authenticated nothing.
+
+  It was already dead rather than merely redundant, and the estate proved it:
+  `icon-sets-emoji`'s `tests.yml` carries no such step and has been resolving
+  `ichava/core` from a VCS repository on every CI run, green. Removing it is
+  therefore not a gamble on rate limits -- it is matching the configuration
+  that already works.
+
+- **`.gitignore` brought onto the estate's.** This pack carried an older,
+  thinner generation. Two of the additions matter rather than merely tidy:
+
+  | | before | after |
+  |---|---|---|
+  | `auth.json` | **not ignored** | ignored |
+  | `.env`, `.env.local`, `.env.*.local` | **not ignored** | ignored |
+  | `/.ichava-maintainer-toolkit/` | not ignored | ignored |
+  | IDE cruft, lint caches, `*.log` | not ignored | ignored |
+
+  `auth.json` holds Composer credentials and `.env` holds whatever a developer
+  puts there; neither was covered, and this pack runs `sync-upstream.yml`, which
+  checks `ichava/maintainer-toolkit` out into the working tree -- a nested repo
+  that git records as a phantom gitlink if it is not ignored.
+
+  Dropped in the same pass: `scripts/.cache/` and `scripts/.downloads/`, which
+  named a directory that **has never been tracked in this repository**. The
+  `.venv/` rule is kept, because one exists in this checkout.
+
 - **CI states the `orchestra/testbench` constraint instead of inheriting it.**
   The matrix gains a `testbench: ^11.0` include and the `composer require` line
   pins it, matching the other four packs.
