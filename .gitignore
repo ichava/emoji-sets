@@ -1,21 +1,52 @@
-/vendor/
-/node_modules/
-composer.lock
-package-lock.json
-.phpunit.cache/
-.phpunit.result.cache
+# Dependencies
+/vendor
+/node_modules
+
+# IDE / editor cruft
+/.idea
+/.vscode
+/.fleet
+/.zed
+*.swp
+*.swo
+*~
+
+# OS cruft
 .DS_Store
+Thumbs.db
 
-# Python virtualenv used by scripts/
-.venv/
-__pycache__/
-*.py[cod]
+# Composer
+composer.lock
+auth.json
 
-# Local ETL artefacts (downloads/intermediate) -- output goes to resources/
-scripts/.cache/
-scripts/.downloads/
+# PHP test + lint caches
+/.phpunit.cache
+.phpunit.result.cache
+/.phpstan.cache
+/.pint.cache
+/.php-cs-fixer.cache
+/.psalm
+/coverage
+coverage.xml
+clover.xml
+
+# Local env / config overrides
+.env
+.env.local
+.env.*.local
+composer.local.json
+
+# Logs
+*.log
 
 # CI checks ichava/maintainer-toolkit out here (sync-upstream.yml).
 # Never track it: a nested repo is recorded as a phantom gitlink.
 /.ichava-maintainer-toolkit/
-/.phpstan.cache
+
+# A Python virtualenv is used here to build the corpus from three upstreams.
+# Kept because one exists in this checkout; the former scripts/.cache and
+# scripts/.downloads entries are gone, since scripts/ has never been tracked
+# in this repository.
+.venv/
+__pycache__/
+*.py[cod]
