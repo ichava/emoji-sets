@@ -19,6 +19,13 @@ Thumbs.db
 composer.lock
 auth.json
 
+# npm / pnpm / yarn
+# A lock file in a *library* records a resolution consumers never use, and it
+# goes stale invisibly because CI resolves fresh rather than installing from it.
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
 # PHP test + lint caches
 /.phpunit.cache
 .phpunit.result.cache
