@@ -2,8 +2,7 @@
 
 Contribution guidelines are centralized for the whole Ichava org:
 
-- [Contributing guide](https://github.com/ichava/documentation/blob/main/CONTRIBUTING.md)
-- [Code of Conduct](https://github.com/ichava/documentation/blob/main/CODE_OF_CONDUCT.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
 
 For this pack specifically: icon assets are refreshed from upstream by the
 [maintainer-toolkit sync](https://opensource.simtabi.com/documentation/ichava/maintainer-toolkit/maintainer-sync).

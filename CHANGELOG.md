@@ -43,6 +43,11 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
   was: a broken `paths-ignore` runs **more** than it should, never less. The cost
   was CI minutes on a free-plan allowance, not a gate that stopped firing.
 
+- **Dead links to the deleted `ichava/documentation` repository removed.** That repository no
+  longer exists, so every cross-reference to it resolved to a 404. The reporting channels in
+  `SECURITY.md` were already stated inline and are unchanged; the Code of Conduct now cites the
+  Contributor Covenant directly. Historical mentions in this changelog are left as written.
+
 ### Removed
 
 - **`metadata.homepage` is absent rather than naming this package.** It read
