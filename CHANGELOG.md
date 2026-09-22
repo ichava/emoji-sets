@@ -6,6 +6,32 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
 
 ### Changed
 
+- **`tests.yml` now carries the trigger and runtime settings the other packs
+  already had.** Four differences, every one in the same direction -- the
+  reference packs had it, this one did not:
+
+  | | before | after |
+  |---|---|---|
+  | `paths-ignore` | none | `'**.md'` |
+  | `branches` | `[main]` | unchanged |
+  | `concurrency` | none | cancel in-progress |
+  | `timeout-minutes` | none, so GitHub's default of 360 | 15 |
+
+  Found by a natural experiment rather than by reading: six identical
+  CHANGELOG-only pull requests opened on the same day ran different checks.
+  `browser`, `icon-sets-flag` and `icon-sets-tabler` ran only `Changelog`; this
+  pack ran the full PHP matrix, because the `'*.md'` to `'**.md'` sweep had
+  changed only the filters that already existed.
+
+  Every one of these fails in the safe direction -- running more than necessary,
+  never less -- so this is CI minutes on a free-plan allowance rather than a gate
+  that stopped firing. The missing `timeout-minutes` was the expensive one: a
+  hung job ran to six hours.
+
+  The `on:` and `concurrency:` blocks are now byte-identical to
+  `icon-sets-flag`'s, and a CHANGELOG-only pull request stays gated here because
+  `changelog.yml` has its own trigger on that file.
+
 - **The markdown path filter now matches markdown at any depth.**
   `code-quality.yml` and `tests.yml` carried `paths-ignore: '*.md'`. In GitHub's
   filter syntax a single `*` does not cross a `/`, so that pattern matched a
