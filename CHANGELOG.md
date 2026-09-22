@@ -6,6 +6,24 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
 
 ### Changed
 
+- **`phpunit.xml.dist` fails on an empty suite and on output during tests.**
+  `failOnEmptyTestSuite` and `beStrictAboutOutputDuringTests` were missing; the
+  file now matches `icon-sets-flag`'s exactly.
+
+- **`.gitattributes` replaced with the estate's.** This pack carried an older,
+  shorter generation: 7 `export-ignore` entries against the other packs' 11, and
+  **no `text`/`eol` rules at all**.
+
+  | | before | after |
+  |---|---|---|
+  | `*.svg` eol handling | unspecified | `-text`, over all 10,567 icons here |
+  | `CHANGELOG.md` | `export-ignore`d | **shipped**, as the other four ship it |
+  | `.editorconfig`, `CONTRIBUTING.md`, `docs/`, `phpstan.neon.dist` | shipped | excluded |
+  | `/scripts` | `export-ignore`d, and no such directory exists | gone |
+
+  Measured on the artefact: `git archive` drops from 34 entries to 28, and
+  `CHANGELOG.md` appears in a dist tarball that previously omitted it.
+
 - **`tests.yml` now carries the trigger and runtime settings the other packs
   already had.** Four differences, every one in the same direction -- the
   reference packs had it, this one did not:
