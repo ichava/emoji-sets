@@ -2,6 +2,38 @@
 
 All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Changed
+
+- **The markdown path filter now matches markdown at any depth.**
+  `code-quality.yml` and `tests.yml` carried `paths-ignore: '*.md'`. In GitHub's
+  filter syntax a single `*` does not cross a `/`, so that pattern matched a
+  root-level `README.md` and nothing else -- every edit under `docs/` ran the
+  full PHP suite and the static-analysis job, which is precisely what the filter
+  existed to skip. `'**.md'` matches at any depth.
+
+  Worth stating which direction this failed in, because it decides how urgent it
+  was: a broken `paths-ignore` runs **more** than it should, never less. The cost
+  was CI minutes on a free-plan allowance, not a gate that stopped firing.
+
+### Removed
+
+- **`metadata.homepage` is absent rather than naming this package.** It read
+  `https://github.com/ichava/icon-sets-emoji`, duplicating
+  `metadata.repository`, and the browser API ships both side by side through
+  `publicMetadata()` -- two identical links under different names.
+
+  The field means the **upstream project's** own site, and this pack has no
+  single one: it vendors Twemoji and OpenMoji across three sets, both already
+  carried in `metadata.authors` with their URLs. Naming either as "the homepage"
+  would misdescribe two thirds of the icons here, so the honest value is no
+  value. Every reader already handles absence -- `IconRegistry` reads it with
+  `?? null`, and `array_intersect_key` simply omits it.
+
+  A test asserts the **absence**, rather than skipping the field, so filling it
+  back in with one of our own URLs fails here instead of shipping.
+
 ## [0.3.2] - 2026-09-21
 
 ### Fixed
