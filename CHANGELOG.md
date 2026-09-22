@@ -2,6 +2,26 @@
 
 All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/).
 
+## [0.3.2] - 2026-09-21
+
+### Fixed
+
+- **Every documentation page carried the index breadcrumb twice.**
+  `[← Docs index](../README.md#documentation)` sat on line 1 as well as in its correct position
+  under the closing `---`, on all 3 pages this pack ships (`attribution.md`, `categories.md`, `sets.md`). The stray copy is deleted
+  and the footer is untouched.
+
+  It shipped in `v0.3.1`. The pass that introduced it added a footer to pages that already had a
+  conforming one, so the defect is **duplication, and the fix is deletion** -- the first report
+  described it as a misplacement needing reversal, which would have produced two footers instead
+  of two headers.
+
+  Measured across the estate rather than from the pull requests that caused it: **16 pages over
+  the five packs, which is every markdown page in `docs/` in all five.** A count taken from those
+  originating diffs said 11, and a second count taken with a shell loop that defaulted a failed
+  API read to zero said fewer still -- an empty response and a clean page are not the same thing,
+  and only one of them is true.
+
 ## [0.3.1] - 2026-09-21
 
 ### Changed
