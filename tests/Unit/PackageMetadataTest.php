@@ -40,3 +40,28 @@ it(description: 'points metadata.repository at this package, not its upstream', 
     // `metadata.homepage` points at the upstream's own site where one exists.
     expect($config['metadata']['repository'])->toBe('https://github.com/ichava/icon-sets-emoji');
 });
+
+it(description: 'omits metadata.homepage rather than pointing it at this package', closure: function () {
+    $config = json_decode(
+        (string) file_get_contents(dirname(__DIR__, 2) . '/resources' . '/assets/svg/config.json'),
+        true,
+        flags: JSON_THROW_ON_ERROR,
+    );
+
+    // Settled 2026-09-22. `metadata.homepage` is the UPSTREAM project's own
+    // site, and this pack has no single one: it vendors Twemoji and OpenMoji
+    // across three sets, both already carried in `metadata.authors` with their
+    // URLs. Naming either as "the homepage" would misdescribe two thirds of
+    // the icons here.
+    //
+    // So the field is ABSENT, not filled with this package's own repository,
+    // which is what it held before. That produced two identical links in the
+    // browser API, where `publicMetadata()` ships `homepage` and `repository`
+    // side by side. An absent field is honest; a duplicated one is not, and
+    // every reader already handles absence -- `IconRegistry` reads it with
+    // `?? null` and `array_intersect_key` simply omits it.
+    //
+    // Asserted as absence rather than skipped, so that filling it back in with
+    // our own URL fails here instead of shipping.
+    expect($config['metadata'])->not->toHaveKey('homepage');
+});
