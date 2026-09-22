@@ -43,7 +43,7 @@ Its upstream is `Twemoji and OpenMoji`; run core's [check pack updates](https://
 
 ## Contributing & security
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Report vulnerabilities privately through [SECURITY.md](SECURITY.md) — never in a public issue.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Report vulnerabilities privately through [security policy](https://github.com/ichava/icon-sets-emoji/security/policy) — never in a public issue.
 
 ## License
 
