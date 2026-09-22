@@ -6,6 +6,21 @@ All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https:
 
 ### Changed
 
+- **`tests.yml` is now byte-identical to the other four packs'.** The file is
+  pack-agnostic -- it names no pack, no vendor and no upstream -- so there was
+  nothing to preserve and it was taken verbatim.
+
+  What this pack was missing: the `Setup problem matchers` step, which registers
+  PHP and PHPUnit matchers so a failure is annotated on the diff in the GitHub UI
+  instead of only appearing in the log. It was also short the `bcmath` and `intl` PHP
+  extensions the other four install, and had drifted in formatting -- a quoted
+  matrix, an unnamed checkout step and a differently named test step.
+
+  That closes the last scaffolding difference across the five packs.
+  `phpunit.xml.dist`, `.gitattributes`, `.editorconfig`, `tests/Pest.php`,
+  `tests.yml`, `code-quality.yml`, `release.yml`, `changelog.yml` and
+  `dependabot.yml` are now identical in all five.
+
 - **The "Authenticate Composer for private GitHub deps" step is gone.** It
   configured a `GH_PACKAGES_PAT` against `github-oauth.github.com` because
   `ichava/core` and `laranail/package-tools` were private. **Both are public
