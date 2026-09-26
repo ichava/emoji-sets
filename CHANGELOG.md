@@ -2,7 +2,26 @@
 
 All notable changes to `ichava/icon-sets-emoji` follow [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.3.4] - 2026-09-26
+
+### Added
+
+- **A test pins the `docs/` shape, and a workflow runs it on the changes that
+  break it.** `tests/Unit/DocsShapeTest.php` asserts the five concern pages the
+  authoring standard requires, this pack's own addressing page, that the README
+  indexes every page and lists none that is absent, and that each page opens at
+  its `# ` title and carries the index link **exactly once** as its footer.
+
+  `docs.yml` exists because of the gap it sits in: `tests.yml` and
+  `code-quality.yml` both carry `paths-ignore: ['**.md']`, so a markdown-only
+  pull request runs neither -- and a markdown-only pull request is exactly what
+  deletes a docs page. It triggers on `**.md`, the test itself and its own file,
+  and nothing else.
+
+  Two of its assertions exist to stop the guard passing vacuously: the page glob
+  is asserted non-empty before the loop reads it, and the README's page list is
+  asserted non-empty before it is cross-checked. A glob that matches nothing
+  otherwise makes every assertion below it true over a directory it never read.
 
 ### Changed
 
